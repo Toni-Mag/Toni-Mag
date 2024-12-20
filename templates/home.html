@@ -10,6 +10,7 @@
     <header>
         <h1>PainFree Living</h1>
         <p>Your guide to a more comfortable, pain-free life.</p>
+        <p>Visitors: {{ count }}</p>
     </header>
     <nav>
         <a href="/">Home</a> |
@@ -26,6 +27,14 @@
             <li><a href="/cosmetic-products">Cosmetic Products</a></li>
         </ul>
     </main>
+<script async src="https://www.googletagmanager.com/gtag/js?id=YOUR_TRACKING_ID"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'YOUR_TRACKING_ID');
+</script>
+
     <footer>
         <p>&copy; 2024 PainFree Living. All rights reserved.</p>
     </footer>

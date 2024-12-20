@@ -2,10 +2,28 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
+# Функция за обновяване на броя на посетителите
+def update_database():
+    try:
+        # Четене и обновяване на броя
+        with open("visitor_count.txt", "r+") as file:
+            count = int(file.read())
+            count += 1
+            file.seek(0)
+            file.write(str(count))
+            file.truncate()
+        return count
+    except FileNotFoundError:
+        # Ако файлът липсва, създаваме нов
+        with open("visitor_count.txt", "w") as file:
+            file.write("1")
+        return 1
+
 # Начална страница
 @app.route("/")
 def home():
-    return render_template("home.html")
+    visitor_count = update_database()
+    return render_template("home.html", count=visitor_count)
 
 # Страница за проблеми с кръста
 @app.route("/back-pain")
