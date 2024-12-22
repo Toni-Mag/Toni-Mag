@@ -30,6 +30,11 @@ def home():
     visitor_count = update_database()
     return render_template("home.html", count=visitor_count)
 
+# Продукти
+@app.route("/products")
+def products():
+    return render_template("products.html")
+
 # Страница за проблеми с кръста
 @app.route("/back-pain")
 def back_pain():
