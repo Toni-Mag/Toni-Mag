@@ -19,35 +19,76 @@
         <a href="/exercise-tools">Exercise Tools</a> |
         <a href="/cosmetic-products">Cosmetic Products</a> |
         <a href="/products">Products</a> |
-        <a href="/forum">Forum</a> |
+        <a href="/forum">Forum</a>
+        <a href="/maria_story">Maria's Story</a> |
     </nav>
     <main>
         <h2>Join the Conversation</h2>
-        <section class="forum-posts">
-            <h3>Recent Discussions</h3>
+        <section class="forum-topics">
+            <h3>Forum Topics</h3>
             <ul>
-                {% if posts %}
-                    {% for post in posts %}
-                    <li><strong>{{ post.name }}:</strong> "{{ post.topic }}" - {{ post.message }}</li>
+                {% if topics %}
+                    {% for topic in topics %}
+                    <li>
+                        <strong><a href="/forum/topic/{{ topic.id }}">{{ topic.title }}</a></strong>
+                        <p>Started by {{ topic.creator }} | Posts: {{ topic.post_count }}</p>
+                    </li>
                     {% endfor %}
                 {% else %}
-                    <li>No discussions yet. Be the first to share your experience!</li>
+                    <li>No topics yet. Be the first to start a discussion!</li>
                 {% endif %}
             </ul>
         </section>
-        <section class="new-post">
+
+        <section class="new-topic">
             <h3>Start a New Discussion</h3>
-            <form action="/add-post" method="POST">
-                <label for="name">Your Name:</label>
-                <input type="text" id="name" name="name" required>
-                
-                <label for="topic">Discussion Topic:</label>
-                <input type="text" id="topic" name="topic" required>
-                
-                <label for="message">Your Message:</label>
+            <form action="/forum/add-topic" method="POST">
+                <label for="creator">Your Name:</label>
+                <input type="text" id="creator" name="creator" required>
+
+                <label for="title">Topic Title:</label>
+                <input type="text" id="title" name="title" required>
+
+                <label for="message">Initial Message:</label>
                 <textarea id="message" name="message" rows="5" required></textarea>
-                
-                <button type="submit">Post</button>
+
+                <button type="submit">Create Topic</button>
+            </form>
+        </section>
+
+        <section class="topic-details">
+            <h3>{{ selected_topic.title }}</h3>
+            <p>Started by {{ selected_topic.creator }}</p>
+            <ul>
+                {% for post in selected_topic.posts %}
+                <li>
+                    <strong>{{ post.name }}</strong>: {{ post.message }}
+                    <ul>
+                        {% for reply in post.replies %}
+                        <li><strong>{{ reply.name }}:</strong> {{ reply.message }}</li>
+                        {% endfor %}
+                    </ul>
+                    <form action="/forum/reply/{{ post.id }}" method="POST" style="margin-top: 10px;">
+                        <label for="reply-name-{{ post.id }}">Your Name:</label>
+                        <input type="text" id="reply-name-{{ post.id }}" name="name" required>
+
+                        <label for="reply-message-{{ post.id }}">Your Reply:</label>
+                        <textarea id="reply-message-{{ post.id }}" name="message" rows="2" required></textarea>
+
+                        <button type="submit">Reply</button>
+                    </form>
+                </li>
+                {% endfor %}
+            </ul>
+            <form action="/forum/add-post/{{ selected_topic.id }}" method="POST">
+                <h4>Add a New Post</h4>
+                <label for="post-name">Your Name:</label>
+                <input type="text" id="post-name" name="name" required>
+
+                <label for="post-message">Message:</label>
+                <textarea id="post-message" name="message" rows="4" required></textarea>
+
+                <button type="submit">Add Post</button>
             </form>
         </section>
     </main>
