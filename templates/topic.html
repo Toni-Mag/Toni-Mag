@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discuss pain relief solutions and share your experiences.">
+    <title>{{ topic.title }} - Forum</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <header>
+        <h1>{{ topic.title }}</h1>
+        <p>Discuss solutions and share experiences.</p>
+    </header>
+    <main>
+        <section class="posts">
+            <h3>Posts</h3>
+            <ul>
+                {% for post in topic.posts %}
+                <li>
+                    <strong>{{ post.name }}</strong>: {{ post.message }}
+                    <ul>
+                        {% for reply in post.replies %}
+                        <li><strong>{{ reply.name }}:</strong> {{ reply.message }}</li>
+                        {% endfor %}
+                    </ul>
+                    <form action="/reply/{{ topic.id }}/{{ post.id }}" method="POST">
+                        <label for="reply-name-{{ post.id }}">Your Name:</label>
+                        <input type="text" id="reply-name-{{ post.id }}" name="name" required>
+                        <label for="reply-message-{{ post.id }}">Your Reply:</label>
+                        <textarea id="reply-message-{{ post.id }}" name="message" rows="2" required></textarea>
+                        <button type="submit">Reply</button>
+                    </form>
+                </li>
+                {% endfor %}
+            </ul>
+        </section>
+        <section class="new-post">
+            <h3>Add a New Post</h3>
+            <form action="/add-post/{{ topic.id }}" method="POST">
+                <label for="name">Your Name:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
+                <button type="submit">Add Post</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 PainFree Living. All rights reserved.</p>
+    </footer>
+</body>
+</html>

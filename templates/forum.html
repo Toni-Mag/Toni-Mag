@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Join discussions and share your experience with pain relief products and solutions.">
-    <meta name="keywords" content="forum, pain relief, back pain, frozen shoulder, ergonomic tools">
+    <meta name="keywords" content="forum, pain relief, back pain, ergonomic tools">
     <title>Forum - PainFree Living</title>
     <link rel="stylesheet" href="/static/styles.css">
 </head>
@@ -19,19 +19,19 @@
         <a href="/exercise-tools">Exercise Tools</a> |
         <a href="/cosmetic-products">Cosmetic Products</a> |
         <a href="/products">Products</a> |
-        <a href="/forum">Forum</a>
         <a href="/maria_story">Maria's Story</a> |
+        <a href="/forum">Forum</a>
     </nav>
     <main>
-        <h2>Join the Conversation</h2>
+        <h2>Forum Topics</h2>
         <section class="forum-topics">
-            <h3>Forum Topics</h3>
+            <h3>Current Topics</h3>
             <ul>
                 {% if topics %}
                     {% for topic in topics %}
                     <li>
-                        <strong><a href="/forum/topic/{{ topic.id }}">{{ topic.title }}</a></strong>
-                        <p>Started by {{ topic.creator }} | Posts: {{ topic.post_count }}</p>
+                        <strong><a href="/topic/{{ topic.id }}">{{ topic.title }}</a></strong>
+                        <p>Posts: {{ topic.posts|length }}</p>
                     </li>
                     {% endfor %}
                 {% else %}
@@ -39,56 +39,12 @@
                 {% endif %}
             </ul>
         </section>
-
         <section class="new-topic">
             <h3>Start a New Discussion</h3>
-            <form action="/forum/add-topic" method="POST">
-                <label for="creator">Your Name:</label>
-                <input type="text" id="creator" name="creator" required>
-
+            <form action="/add-topic" method="POST">
                 <label for="title">Topic Title:</label>
                 <input type="text" id="title" name="title" required>
-
-                <label for="message">Initial Message:</label>
-                <textarea id="message" name="message" rows="5" required></textarea>
-
                 <button type="submit">Create Topic</button>
-            </form>
-        </section>
-
-        <section class="topic-details">
-            <h3>{{ selected_topic.title }}</h3>
-            <p>Started by {{ selected_topic.creator }}</p>
-            <ul>
-                {% for post in selected_topic.posts %}
-                <li>
-                    <strong>{{ post.name }}</strong>: {{ post.message }}
-                    <ul>
-                        {% for reply in post.replies %}
-                        <li><strong>{{ reply.name }}:</strong> {{ reply.message }}</li>
-                        {% endfor %}
-                    </ul>
-                    <form action="/forum/reply/{{ post.id }}" method="POST" style="margin-top: 10px;">
-                        <label for="reply-name-{{ post.id }}">Your Name:</label>
-                        <input type="text" id="reply-name-{{ post.id }}" name="name" required>
-
-                        <label for="reply-message-{{ post.id }}">Your Reply:</label>
-                        <textarea id="reply-message-{{ post.id }}" name="message" rows="2" required></textarea>
-
-                        <button type="submit">Reply</button>
-                    </form>
-                </li>
-                {% endfor %}
-            </ul>
-            <form action="/forum/add-post/{{ selected_topic.id }}" method="POST">
-                <h4>Add a New Post</h4>
-                <label for="post-name">Your Name:</label>
-                <input type="text" id="post-name" name="name" required>
-
-                <label for="post-message">Message:</label>
-                <textarea id="post-message" name="message" rows="4" required></textarea>
-
-                <button type="submit">Add Post</button>
             </form>
         </section>
     </main>

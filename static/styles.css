@@ -1,3 +1,52 @@
+.forum-posts li ul li {
+    background: #e9ecef;
+    padding: 8px;
+    margin: 5px 0 0;
+    border-left: 3px solid #0077b6;
+}
+.new-post input:focus, .new-post textarea:focus {
+    border-color: #0077b6;
+    box-shadow: 0 0 5px rgba(0, 119, 182, 0.5);
+    outline: none;
+}
+nav {
+    position: relative;
+}
+
+nav .menu {
+    display: none;
+    flex-direction: column;
+    background: #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+}
+
+nav:hover .menu {
+    display: flex;
+}
+button {
+    background: #0077b6;
+    color: #fff;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: #005f99;
+}
+
+button:focus {
+    outline: 2px dashed #005f99;
+    outline-offset: 2px;
+}
 .forum-posts ul {
     list-style-type: none;
     padding: 0;

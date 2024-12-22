@@ -2,7 +2,32 @@ from flask import Flask, render_template, request, redirect
 
 app = Flask(__name__)
 
-# Списък за съхранение на темите във форума
+# Страници на сайта
+@app.route("/")
+def home():
+    return render_template("home.html")
+
+@app.route("/products")
+def products():
+    return render_template("products.html")
+
+@app.route("/back-pain")
+def back_pain():
+    return render_template("back_pain.html")
+
+@app.route("/exercise-tools")
+def exercise_tools():
+    return render_template("exercise_tools.html")
+
+@app.route("/cosmetic-products")
+def cosmetic_products():
+    return render_template("cosmetic_products.html")
+
+@app.route("/maria_story")
+def maria_story():
+    return render_template("maria_story.html")
+
+# Форум
 forum_topics = [
     {
         "id": 1,
@@ -20,96 +45,53 @@ forum_topics = [
     }
 ]
 
-def find_topic_by_id(topic_id):
-    """Намира тема по ID."""
-    for topic in forum_topics:
-        if topic["id"] == topic_id:
-            return topic
-    return None
-
-def find_post_by_id(topic, post_id):
-    """Намира пост по ID в дадена тема."""
-    for post in topic["posts"]:
-        if post["id"] == post_id:
-            return post
-    return None
-
-def generate_new_id(collection):
-    """Генерира ново уникално ID за дадена колекция."""
-    return max([item["id"] for item in collection], default=0) + 1
-
 @app.route("/forum")
 def forum():
-    """Показва страницата на форума със списък от теми."""
     return render_template("forum.html", topics=forum_topics)
 
 @app.route("/topic/<int:topic_id>")
 def topic(topic_id):
-    """Показва постовете в дадена тема."""
-    topic = find_topic_by_id(topic_id)
+    topic = next((t for t in forum_topics if t["id"] == topic_id), None)
     if not topic:
         return "Topic not found", 404
     return render_template("topic.html", topic=topic)
 
 @app.route("/add-topic", methods=["POST"])
 def add_topic():
-    """Добавя нова тема към форума."""
     title = request.form.get("title")
     if not title:
         return "Title is required", 400
-
-    new_topic = {
-        "id": generate_new_id(forum_topics),
-        "title": title,
-        "posts": []
-    }
+    new_topic = {"id": len(forum_topics) + 1, "title": title, "posts": []}
     forum_topics.append(new_topic)
     return redirect("/forum")
 
 @app.route("/add-post/<int:topic_id>", methods=["POST"])
 def add_post(topic_id):
-    """Добавя нов пост в дадена тема."""
-    topic = find_topic_by_id(topic_id)
+    topic = next((t for t in forum_topics if t["id"] == topic_id), None)
     if not topic:
         return "Topic not found", 404
-
     name = request.form.get("name")
     message = request.form.get("message")
     if not (name and message):
         return "Name and message are required", 400
-
-    new_post = {
-        "id": generate_new_id(topic["posts"]),
-        "name": name,
-        "message": message,
-        "replies": []
-    }
+    new_post = {"id": len(topic["posts"]) + 1, "name": name, "message": message, "replies": []}
     topic["posts"].append(new_post)
     return redirect(f"/topic/{topic_id}")
 
 @app.route("/reply/<int:topic_id>/<int:post_id>", methods=["POST"])
 def reply(topic_id, post_id):
-    """Добавя отговор към конкретен пост."""
-    topic = find_topic_by_id(topic_id)
+    topic = next((t for t in forum_topics if t["id"] == topic_id), None)
     if not topic:
         return "Topic not found", 404
-
-    post = find_post_by_id(topic, post_id)
+    post = next((p for p in topic["posts"] if p["id"] == post_id), None)
     if not post:
         return "Post not found", 404
-
     reply_name = request.form.get("name")
     reply_message = request.form.get("message")
     if not (reply_name and reply_message):
         return "Name and message are required", 400
-
     post["replies"].append({"name": reply_name, "message": reply_message})
     return redirect(f"/topic/{topic_id}")
-
-@app.route("/")
-def home():
-    """Начална страница."""
-    return render_template("home.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
