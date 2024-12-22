@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Join discussions and share your experience with pain relief products and solutions.">
+    <meta name="keywords" content="forum, pain relief, back pain, frozen shoulder, ergonomic tools">
+    <title>Forum - PainFree Living</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <header>
+        <h1>PainFree Living Forum</h1>
+        <p>Share your experience and learn from others about pain relief products and solutions.</p>
+    </header>
+    <nav>
+        <a href="/">Home</a> |
+        <a href="/back-pain">Back Pain Solutions</a> |
+        <a href="/exercise-tools">Exercise Tools</a> |
+        <a href="/cosmetic-products">Cosmetic Products</a> |
+        <a href="/products">Products</a> |
+        <a href="/forum">Forum</a> |
+    </nav>
+    <main>
+        <h2>Join the Conversation</h2>
+        <section class="forum-posts">
+            <h3>Recent Discussions</h3>
+            <ul>
+                {% if posts %}
+                    {% for post in posts %}
+                    <li><strong>{{ post.name }}:</strong> "{{ post.topic }}" - {{ post.message }}</li>
+                    {% endfor %}
+                {% else %}
+                    <li>No discussions yet. Be the first to share your experience!</li>
+                {% endif %}
+            </ul>
+        </section>
+        <section class="new-post">
+            <h3>Start a New Discussion</h3>
+            <form action="/add-post" method="POST">
+                <label for="name">Your Name:</label>
+                <input type="text" id="name" name="name" required>
+                
+                <label for="topic">Discussion Topic:</label>
+                <input type="text" id="topic" name="topic" required>
+                
+                <label for="message">Your Message:</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+                
+                <button type="submit">Post</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 PainFree Living. All rights reserved.</p>
+    </footer>
+</body>
+</html>

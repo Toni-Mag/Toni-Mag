@@ -1,3 +1,39 @@
+.forum-posts ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.forum-posts li {
+    background: #f4f4f4;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.new-post form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.new-post input, .new-post textarea, .new-post button {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.new-post button {
+    background: #0077b6;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.new-post button:hover {
+    background: #005f99;
+}
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;

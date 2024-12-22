@@ -1,11 +1,30 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect
 
 app = Flask(__name__)
+
+# Списък за съхранение на постовете (в реален проект ще използвате база данни)
+forum_posts = []
+
+@app.route("/forum")
+def forum():
+    # Подаване на постовете към шаблона
+    return render_template("forum.html", posts=forum_posts)
+
+@app.route("/add-post", methods=["POST"])
+def add_post():
+    # Получаване на данни от формуляра
+    name = request.form.get("name")
+    topic = request.form.get("topic")
+    message = request.form.get("message")
+    
+    # Добавяне на новия пост в списъка
+    forum_posts.append({"name": name, "topic": topic, "message": message})
+    
+    return redirect("/forum")
 
 @app.route("/maria_story")
 def maria_story():
     return render_template("maria_story.html")
-
 
 # Функция за обновяване на броя на посетителите
 def update_database():
