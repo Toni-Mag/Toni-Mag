@@ -23,6 +23,9 @@ nav {
     padding: 10px;
     text-align: center;
     border-bottom: 2px solid #ccc;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 nav a {
@@ -37,15 +40,27 @@ nav a:hover {
     color: #005f99;
 }
 
+nav a:focus {
+    outline: 2px dashed #005f99;
+    outline-offset: 2px;
+}
+
 footer {
     text-align: center;
     padding: 10px;
     background: #0077b6;
     color: #fff;
-    position: fixed;
-    bottom: 0;
+    position: static;
     width: 100%;
     box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.center-logo {
+    max-width: 100%;
+    width: 300px;
+    height: auto;
+    margin: 20px auto;
+    display: block;
 }
 
 @media (max-width: 768px) {
@@ -55,9 +70,15 @@ footer {
 
     footer {
         position: static;
+        padding: 20px;
     }
 
     nav {
         font-size: 14px;
+    }
+
+    nav a {
+        display: block;
+        margin: 5px 0;
     }
 }
