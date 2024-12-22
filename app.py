@@ -2,6 +2,11 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
+@app.route("/maria_story")
+def maria_story():
+    return render_template("maria_story.html")
+
+
 # Функция за обновяване на броя на посетителите
 def update_database():
     try:
