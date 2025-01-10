@@ -1,93 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Join discussions and share your experience with pain relief products and solutions.">
-    <meta name="keywords" content="forum, pain relief, back pain, ergonomic tools">
-    <title>Forum - PainFree Living</title>
-    <link rel="stylesheet" href="/static/styles.css">
-</head>
-<body>
-    <header>
-        <h1>PainFree Living Forum</h1>
-        <p>Share your experience and learn from others about pain relief products and solutions.</p>
-    </header>
-    <nav>
-        <a href="/">Home</a> |
-        <a href="/back-pain">Back Pain Solutions</a> |
-        <a href="/exercise-tools">Exercise Tools</a> |
-        <a href="/cosmetic-products">Cosmetic Products</a> |
-        <a href="/products">Products</a> |
-        <a href="/maria_story">Maria's Story</a> |
-        <a href="/forum">Forum</a>
-    </nav>
-    <main>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4812899709232388"
-     crossorigin="anonymous"></script>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-1B5CD02XYJ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+{% extends "base.html" %}
 
-  gtag('config', 'G-1B5CD02XYJ');
-</script>
-<link rel="icon" href="/static/images/favicon.ico" type="image/x-icon">
-<div class="logo-container">
-        <img src="{{ url_for('static', filename='images/logo_painfreeliving.png') }}" alt="PainFree Living Logo" class="logo">
-    </div>
-
-        <h2>Forum Topics</h2>
-        <section class="forum-topics">
-            <h3>Current Topics</h3>
-            <ul>
-    <main>
-        <h1>Forum</h1>
-        <p>Join the conversation and share your thoughts with our community.</p>
-        <section>
-            <h2>Topics</h2>
-            <ul>
-                <li>
-                    <h3><a href="topic.html">How to Use the Ergonomic Disc</a></h3>
-                    <p>Discussion about the benefits and techniques for using the ergonomic disc.</p>
-                </li>
-                <li>
-                    <h3><a href="topic.html">Best Exercises for Lower Back Pain</a></h3>
-                    <p>Share your favorite exercises or ask for advice.</p>
-                </li>
-            </ul>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2024 PainFree Living</p>
-    </footer>
-
-
-                {% if topics %}
-                    {% for topic in topics %}
-                    <li>
-                        <strong><a href="/topic/{{ topic.id }}">{{ topic.title }}</a></strong>
-                        <p>Posts: {{ topic.posts|length }}</p>
-                    </li>
-                    {% endfor %}
-                {% else %}
-                    <li>No topics yet. Be the first to start a discussion!</li>
-                {% endif %}
-            </ul>
-        </section>
-        <section class="new-topic">
-            <h3>Start a New Discussion</h3>
-            <form action="/add-topic" method="POST">
-                <label for="title">Topic Title:</label>
-                <input type="text" id="title" name="title" required>
-                <button type="submit">Create Topic</button>
-            </form>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2024 PainFree Living. All rights reserved.</p>
-    </footer>
-</body>
-</html>
+{% block content %}
+<h2>Forum Topics</h2>
+<section class="forum-topics">
+    <h3>Current Topics</h3>
+    <ul>
+        <li>
+            <h3><a href="topic.html">How to Use the Ergonomic Disc</a></h3>
+            <p>Discussion about the benefits and techniques for using the ergonomic disc.</p>
+        </li>
+        <li>
+            <h3><a href="topic.html">Best Exercises for Lower Back Pain</a></h3>
+            <p>Share your favorite exercises or ask for advice.</p>
+        </li>
+    </ul>
+</section>
+<section class="new-topic">
+    <h3>Start a New Discussion</h3>
+    <form action="/add-topic" method="POST">
+        <label for="title">Topic Title:</label>
+        <input type="text" id="title" name="title" required>
+        <button type="submit">Create Topic</button>
+    </form>
+</section>
+{% endblock %}
