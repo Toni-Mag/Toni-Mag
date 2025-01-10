@@ -1,74 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="PainFree Living - Trusted solutions for health, wellness, and community support.">
-    <meta name="keywords" content="health, back pain, wellness, ergonomic solutions, support community">
-    <meta name="author" content="PainFree Living">
-    <title>Welcome to PainFree Living</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <img src="{{ url_for('static', filename='images/logo_painfreeliving.png') }}" alt="Logo">
+{% extends "base.html" %}
 
-</head>
-<body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/back-pain">Back Pain Solutions</a></li>
-                <li><a href="/exercise-tools">Exercise Tools</a></li>
-                <li><a href="/cosmetic-products">Cosmetic Products</a></li>
-                <li><a href="/maria_story">Maria's Story</a></li>
-                <li><a href="/products">Products</a></li>
-                <li><a href="/forum">Forum</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <section class="intro">
-            <h1>Welcome to PainFree Living</h1>
-            <p>
-                In our fast-paced lives, it's easy to neglect the simple yet essential comforts our bodies need. We often take our health for granted, assuming we’ll always be strong and pain-free, until the moment comes when we’re confronted with the reality of health challenges.
-            </p>
-            <p>
-                Back pain, herniated discs, sciatica, and posture-related problems can disrupt not only our physical well-being but also our daily routines, work performance, and even sleep. At <strong>PainFree Living</strong>, we are here to remind you that you’re not alone in this journey. This platform was created to help you navigate these challenges with trusted advice, effective tools, and a supportive community.
-            </p>
-            <p>
-                By offering carefully selected and tested products, our aim is to provide you with practical solutions to ease discomfort and improve your quality of life. Additionally, we understand the power of shared experiences. Our <a href="/forum">Forum</a> is a space where you can exchange ideas, ask for advice, or simply connect with others who understand your journey.
-            </p>
-        </section>
-        <section class="featured-products">
-            <h2>Why Trust Us?</h2>
-            <p>
-                At PainFree Living, we carefully review every product we recommend to ensure it meets the highest standards of quality and effectiveness. Our mission is to not only alleviate your discomfort but also to empower you to live a healthier, happier life.
-            </p>
-            <h2>Featured Products</h2>
-            <ul>
-                <li>
-                    <h3>Ergonomic Office Chair</h3>
-                    <p>Designed to align your spine and reduce strain during long hours of work.</p>
-                    <a href="https://amzn.to/41M2Qzb" target="_blank">Buy Now on Amazon</a>
-                </li>
-                <li>
-                    <h3>Lumbar Support Cushion</h3>
-                    <p>A perfect addition to your workspace or car seat, providing much-needed lumbar support.</p>
-                    <a href="https://amzn.to/41M2Qzb" target="_blank">Buy Now on Amazon</a>
-                </li>
-            </ul>
-        </section>
-        <section class="community-invitation">
-            <h2>Be a Part of Our Community</h2>
-            <p>
-                Your story matters. By sharing your experiences, you not only find support but also inspire and help others who may be facing similar challenges. Together, we can create a network of care, compassion, and solutions.
-            </p>
-            <p>
-                Visit our <a href="/forum">Forum</a> to contribute your thoughts, seek advice, or simply connect with like-minded individuals. Your insights could be the guidance someone else needs to take their first step toward a pain-free life.
-            </p>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2024 PainFree Living. All rights reserved. Join us in making life healthier and happier, one step at a time.</p>
-    </footer>
-</body>
-</html>
+{% block content %}
+<section class="intro">
+    <h1>Welcome to PainFree Living</h1>
+    <p>
+        In our fast-paced lives, it's easy to neglect the simple yet essential comforts our bodies need. We often take our health for granted, assuming we’ll always be strong and pain-free, until the moment comes when we’re confronted with the reality of health challenges.
+    </p>
+    <p>
+        Back pain, herniated discs, sciatica, and posture-related problems can disrupt not only our physical well-being but also our daily routines, work performance, and even sleep. At <strong>PainFree Living</strong>, we are here to remind you that you’re not alone in this journey. This platform was created to help you navigate these challenges with trusted advice, effective tools, and a supportive community.
+    </p>
+    <p>
+        By offering carefully selected and tested products, our aim is to provide you with practical solutions to ease discomfort and improve your quality of life. Additionally, we understand the power of shared experiences. Our <a href="/forum">Forum</a> is a space where you can exchange ideas, ask for advice, or simply connect with others who understand your journey.
+    </p>
+</section>
+<section class="featured-products">
+    <h2>Why Trust Us?</h2>
+    <p>
+        At PainFree Living, we carefully review every product we recommend to ensure it meets the highest standards of quality and effectiveness. Our mission is to not only alleviate your discomfort but also to empower you to live a healthier, happier life.
+    </p>
+    <h2>Featured Products</h2>
+    <ul>
+        <li>
+            <h3>Ergonomic Office Chair</h3>
+            <p>Designed to align your spine and reduce strain during long hours of work.</p>
+            <a href="https://amzn.to/41M2Qzb" target="_blank">Buy Now on Amazon</a>
+        </li>
+        <li>
+            <h3>Lumbar Support Cushion</h3>
+            <p>A perfect addition to your workspace or car seat, providing much-needed lumbar support.</p>
+            <a href="https://amzn.to/41M2Qzb" target="_blank">Buy Now on Amazon</a>
+        </li>
+    </ul>
+</section>
+<section class="community-invitation">
+    <h2>Be a Part of Our Community</h2>
+    <p>
+        Your story matters. By sharing your experiences, you not only find support but also inspire and help others who may be facing similar challenges. Together, we can create a network of care, compassion, and solutions.
+    </p>
+    <p>
+        Visit our <a href="/forum">Forum</a> to contribute your thoughts, seek advice, or simply connect with like-minded individuals. Your insights could be the guidance someone else needs to take their first step toward a pain-free life.
+    </p>
+</section>
+{% endblock %}

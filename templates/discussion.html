@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="intro">
+    <h1>How to Use the Ergonomic Disc</h1>
+    <p>This topic explores the benefits and proper techniques for using the ergonomic disc.</p>
+</section>
+<section class="video">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/example" frameborder="0" allowfullscreen></iframe>
+</section>
+<section class="comments">
+    <h2>Comments</h2>
+    <ul>
+        <li><strong>Anna:</strong> This disc has really improved my posture!</li>
+        <li><strong>John:</strong> How often should I use it? Any tips?</li>
+    </ul>
+</section>
+<section class="add-comment">
+    <h2>Add a Comment</h2>
+    <form action="add-comment" method="POST">
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" name="name" required>
+        <br>
+        <label for="comment">Comment:</label>
+        <textarea id="comment" name="comment" rows="4" required></textarea>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+</section>
+{% endblock %}

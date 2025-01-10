@@ -1,56 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Join the discussion about ergonomic tools and tips for back pain relief.">
-    <meta name="keywords" content="forum topic, ergonomic tools, discussions, back pain relief">
-    <meta name="author" content="PainFree Living">
-    <title>Discussion: Ergonomic Disc - PainFree Living</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <img src="{{ url_for('static', filename='images/logo_painfreeliving.png') }}" alt="Logo">
+{% extends "base.html" %}
 
-</head>
-<body>
-    <header>
-        <nav>
+{% block content %}
+<section class="intro">
+    <h1>{{ topic.title }}</h1>
+    <p>{{ topic.description }}</p>
+</section>
+<section class="comments">
+    <h2>Comments</h2>
     <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/back-pain">Back Pain Solutions</a></li>
-        <li><a href="/exercise-tools">Exercise Tools</a></li>
-        <li><a href="/cosmetic-products">Cosmetic Products</a></li>
-        <li><a href="/maria_story">Maria's Story</a></li>
-        <li><a href="/products">Products</a></li>
-        <li><a href="/forum">Forum</a></li>
+        {% if topic.comments %}
+            {% for comment in topic.comments %}
+            <li>
+                <strong>{{ comment.author }}:</strong> {{ comment.text }}
+            </li>
+            {% endfor %}
+        {% else %}
+            <p>No comments yet. Be the first to comment!</p>
+        {% endif %}
     </ul>
-       </nav>
-    </header>
-    <main>
-        <h1>How to Use the Ergonomic Disc</h1>
-        <p>This topic explores the benefits and proper techniques for using the ergonomic disc.</p>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/example" frameborder="0" allowfullscreen></iframe>
-        <section>
-            <h2>Comments</h2>
-            <ul>
-                <li><strong>Anna:</strong> This disc has really improved my posture!</li>
-                <li><strong>John:</strong> How often should I use it? Any tips?</li>
-            </ul>
-        </section>
-        <section>
-            <h2>Add a Comment</h2>
-            <form action="add-comment" method="POST">
-                <label for="name">Your Name:</label>
-                <input type="text" id="name" name="name" required>
-                <br>
-                <label for="comment">Comment:</label>
-                <textarea id="comment" name="comment" rows="4" required></textarea>
-                <br>
-                <button type="submit">Submit</button>
-            </form>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2024 PainFree Living</p>
-    </footer>
-</body>
-</html>
+</section>
+<section class="add-comment">
+    <h2>Add a Comment</h2>
+    <form action="{{ url_for('add_post', topic_id=topic.id) }}" method="POST">
+        <!-- CSRF защита (ако се използва Flask-WTF) -->
+        {{ form.hidden_tag() }}
+        
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+        <br>
+        
+        <label for="comment">Comment:</label>
+        <textarea id="comment" name="comment" rows="4" placeholder="Write your comment here" required></textarea>
+        <br>
+        
+        <button type="submit">Submit Comment</button>
+    </form>
+</section>
+{% endblock %}

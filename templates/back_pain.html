@@ -1,53 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Discover effective solutions for back pain and ergonomic tools.">
-    <meta name="keywords" content="back pain, lumbar support, ergonomic tools, posture improvement">
-    <meta name="author" content="PainFree Living">
-    <title>Back Pain Solutions - PainFree Living</title>
-   <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <img src="{{ url_for('static', filename='images/logo_painfreeliving.png') }}" alt="Logo">
+{% extends "base.html" %}
 
-</head>
-<body>
-    <header>
-        <nav>
+{% block content %}
+<section class="intro">
+    <h1>Back Pain Solutions</h1>
+    <p>Find the best tools and tips for managing back pain and improving your posture.</p>
+</section>
+<section class="featured-products">
+    <h2>Recommended Products</h2>
     <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/back-pain">Back Pain Solutions</a></li>
-        <li><a href="/exercise-tools">Exercise Tools</a></li>
-        <li><a href="/cosmetic-products">Cosmetic Products</a></li>
-        <li><a href="/maria_story">Maria's Story</a></li>
-        <li><a href="/products">Products</a></li>
-        <li><a href="/forum">Forum</a></li>
+        <li>
+            <h3>Ergonomic Office Chair</h3>
+            <p>Designed to keep your spine aligned and reduce strain during long hours of sitting.</p>
+            <a href="https://amzn.to/41M2Qzb" target="_blank">Buy Now on Amazon</a>
+        </li>
+        <li>
+            <h3>Lumbar Support Cushion</h3>
+            <p>Perfect for office chairs, car seats, or sofas, this cushion ensures optimal lumbar support.</p>
+            <a href="https://amzn.to/41M2Qzb" target="_blank">Buy Now on Amazon</a>
+        </li>
     </ul>
-        </nav>
-    </header>
-    <main>
-        <h1>Back Pain Solutions</h1>
-        <p>Find the best tools and tips for managing back pain and improving your posture.</p>
-        <section>
-            <h2>Recommended Products</h2>
-            <ul>
-     {% for product in products %}
-                <li>
-                    <h3>Ergonomic Office Chair</h3>
-                    <p>Designed to keep your spine aligned and reduce strain during long hours of sitting.</p>
-                    <a href="https://amzn.to/41M2Qzb" target="_blank">Buy Now on Amazon</a>
-                </li>
-                <li>
-                    <h3>Lumbar Support Cushion</h3>
-                    <p>Perfect for office chairs, car seats, or sofas, this cushion ensures optimal lumbar support.</p>
-                    <a href="https://amzn.to/41M2Qzb" target="_blank">Buy Now on Amazon</a>
-                </li>
-      {% endfor %}
-            </ul>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2024 PainFree Living</p>
-    </footer>
-</body>
-</html>
+</section>
+{% endblock %}

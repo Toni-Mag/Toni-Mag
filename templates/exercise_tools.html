@@ -1,84 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Find compact and efficient exercise tools to stay fit and healthy at home.">
-    <meta name="keywords" content="home workout, fitness tools, exercise equipment, healthy lifestyle">
-    <meta name="author" content="PainFree Living">
-    <title>Exercise Tools - PainFree Living</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <img src="{{ url_for('static', filename='images/logo_painfreeliving.png') }}" alt="Logo">
+{% extends "base.html" %}
 
-</head>
-<body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/back-pain">Back Pain Solutions</a></li>
-                <li><a href="/exercise-tools" class="active">Exercise Tools</a></li>
-                <li><a href="/cosmetic-products">Cosmetic Products</a></li>
-                <li><a href="/maria_story">Maria's Story</a></li>
-                <li><a href="/products">Products</a></li>
-                <li><a href="/forum">Forum</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <section class="intro">
-            <h1>Exercise Tools</h1>
+{% block content %}
+<section class="intro">
+    <h1>Exercise Tools</h1>
+    <p>
+        Staying fit and healthy doesn’t always mean visiting the gym. In our busy lives, finding time to exercise outside the home can be a challenge. That’s why we believe in practical solutions that allow you to maintain your fitness from the comfort of your home, whether it’s in front of the TV or near your bed.
+    </p>
+    <p>
+        Imagine having compact, quiet, and highly functional tools that fit seamlessly into your daily routine. These tools are perfect for anyone looking to stay in shape, relieve stress, and boost their overall health without needing to leave home.
+    </p>
+</section>
+<section class="featured-tools">
+    <h2>Recommended Exercise Tools</h2>
+    <ul>
+        <li>
+            <h3>Twist Disk</h3>
             <p>
-                Staying fit and healthy doesn’t always mean visiting the gym. In our busy lives, finding time to exercise outside the home can be a challenge. That’s why we believe in practical solutions that allow you to maintain your fitness from the comfort of your home, whether it’s in front of the TV or near your bed.
+                Strengthen your core and improve flexibility with this compact and easy-to-use twist disk. Ideal for a quick workout session while watching your favorite TV shows.
             </p>
+            <a href="https://amzn.to/41MmcnL" target="_blank">Buy Now on Amazon</a>
+        </li>
+        <li>
+            <h3>Resistance Bands</h3>
             <p>
-                Imagine having compact, quiet, and highly functional tools that fit seamlessly into your daily routine. These tools are perfect for anyone looking to stay in shape, relieve stress, and boost their overall health without needing to leave home.
+                A versatile tool for low-impact exercises, these bands help you tone your muscles and improve flexibility. Perfect for both beginners and advanced fitness enthusiasts.
             </p>
-        </section>
-        <section class="featured-tools">
-            <h2>Recommended Exercise Tools</h2>
-            <ul>
-                <li>
-                    <h3>Twist Disk</h3>
-                    <p>
-                        Strengthen your core and improve flexibility with this compact and easy-to-use twist disk. Ideal for a quick workout session while watching your favorite TV shows.
-                    </p>
-                    <a href="https://amzn.to/41MmcnL" target="_blank">Buy Now on Amazon</a>
-                </li>
-                <li>
-                    <h3>Resistance Bands</h3>
-                    <p>
-                        A versatile tool for low-impact exercises, these bands help you tone your muscles and improve flexibility. Perfect for both beginners and advanced fitness enthusiasts.
-                    </p>
-                    <a href="https://amzn.to/3VN06xS" target="_blank">Buy Now on Amazon</a>
-                </li>
-                <li>
-                    <h3>Foldable Yoga Mat</h3>
-                    <p>
-                        This non-slip, cushioned yoga mat is ideal for yoga, stretching, and pilates routines at home. Its foldable design makes it easy to store after use.
-                    </p>
-                    <a href="https://amzn.to/3YogaMat" target="_blank">Buy Now on Amazon</a>
-                </li>
-            </ul>
-        </section>
-        <section class="why-home-workouts">
-            <h2>Why Choose Home Workouts?</h2>
+            <a href="https://amzn.to/3VN06xS" target="_blank">Buy Now on Amazon</a>
+        </li>
+        <li>
+            <h3>Foldable Yoga Mat</h3>
             <p>
-                Exercising at home saves time and eliminates the hassle of commuting to the gym. It provides the flexibility to work out whenever it suits you, without worrying about gym schedules. Plus, it’s a cost-effective solution that lets you focus on your health in a comfortable and private environment.
+                This non-slip, cushioned yoga mat is ideal for yoga, stretching, and pilates routines at home. Its foldable design makes it easy to store after use.
             </p>
-            <p>
-                Our recommended tools are compact, effective, and designed to integrate seamlessly into your lifestyle. Whether you're a busy professional or a parent managing a household, these tools offer a practical way to stay healthy and pain-free.
-            </p>
-        </section>
-        <section class="community-invitation">
-            <h2>Join Our Community</h2>
-            <p>
-                Share your experiences and tips with others in our <a href="/forum">Forum</a>. Your journey to better health and fitness can inspire and guide someone else to take their first step.
-            </p>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2024 PainFree Living. Empowering your journey to health and wellness.</p>
-    </footer>
-</body>
-</html>
+            <a href="https://amzn.to/3YogaMat" target="_blank">Buy Now on Amazon</a>
+        </li>
+    </ul>
+</section>
+<section class="why-home-workouts">
+    <h2>Why Choose Home Workouts?</h2>
+    <p>
+        Exercising at home saves time and eliminates the hassle of commuting to the gym. It provides the flexibility to work out whenever it suits you, without worrying about gym schedules. Plus, it’s a cost-effective solution that lets you focus on your health in a comfortable and private environment.
+    </p>
+    <p>
+        Our recommended tools are compact, effective, and designed to integrate seamlessly into your lifestyle. Whether you're a busy professional or a parent managing a household, these tools offer a practical way to stay healthy and pain-free.
+    </p>
+</section>
+<section class="community-invitation">
+    <h2>Join Our Community</h2>
+    <p>
+        Share your experiences and tips with others in our <a href="/forum">Forum</a>. Your journey to better health and fitness can inspire and guide someone else to take their first step.
+    </p>
+</section>
+{% endblock %}

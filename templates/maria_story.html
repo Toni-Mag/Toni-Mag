@@ -1,97 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Read Maria's inspiring story of overcoming severe back pain and reclaiming her life.">
-    <meta name="keywords" content="Maria's story, back pain recovery, ergonomic tools, health journey, pain management">
-    <meta name="author" content="PainFree Living">
-    <title>Maria's Story - PainFree Living</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <img src="{{ url_for('static', filename='images/logo_painfreeliving.png') }}" alt="Logo">
+{% extends "base.html" %}
 
-</head>
-<body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/back-pain">Back Pain Solutions</a></li>
-                <li><a href="/exercise-tools">Exercise Tools</a></li>
-                <li><a href="/cosmetic-products">Cosmetic Products</a></li>
-                <li><a href="/maria_story" class="active">Maria's Story</a></li>
-                <li><a href="/products">Products</a></li>
-                <li><a href="/forum">Forum</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <section class="intro">
-            <h1>Maria's Story</h1>
-            <p>
-                Meet Maria, a determined individual who faced debilitating back pain, frozen shoulder, and sciatica. Her journey is one of resilience, perseverance, and a testament to the power of proper care and effective tools.
-            </p>
-        </section>
-        <section class="challenge">
-            <h2>The Challenge</h2>
-            <p>
-                Maria's problems began with an intense fitness routine. Without adequate warm-ups, her enthusiasm turned into pain that gradually worsened. Simple activities like sitting or standing became unbearable. 
-                She developed herniated discs, sciatica, and frozen shoulder, leading to chronic pain in her lower back, neck, and limbs. Sleep and work became impossible, and the lack of movement caused weight gain during her recovery.
-            </p>
-        </section>
-        <section class="turnaround">
-            <h2>The Turning Point</h2>
-            <p>
-                After months of suffering, Maria discovered ergonomic tools and therapy products. Her journey began with a few essential items:
-            </p>
-            <ul>
-                <li><strong>Ergonomic Lumbar Cushion:</strong> Provided much-needed support while sitting, relieving pressure on her lower back.</li>
-                <li><strong>Twist Disk:</strong> Allowed her to start gentle core exercises, regaining strength and flexibility.</li>
-                <li><strong>Knee Pillow:</strong> Improved her sleep posture, reducing strain on her spine and hips.</li>
-                <li><strong>Portable Massage Tool:</strong> Helped her manage muscle tension and pain during recovery.</li>
-            </ul>
-            <p>
-                Alongside these tools, Maria introduced regular stretching routines and low-impact exercises like yoga and pilates. These small but consistent efforts brought a gradual yet significant improvement in her mobility and well-being.
-            </p>
-        </section>
-        <section class="success">
-            <h2>Reclaiming Her Life</h2>
-            <p>
-                Today, Maria is back to doing the things she loves. Thanks to ergonomic tools and her commitment to self-care, she enjoys her work, sleeps peacefully, and moves without pain. Her journey proves that with the right mindset and resources, recovery is possible.
-            </p>
-            <p>
-                Maria shares her story to inspire others to prioritize their health and explore effective solutions for pain management. Her advice? <strong>"Take care of your body before it forces you to."</strong>
-            </p>
-        </section>
-        <section class="recommended-tools">
-            <h2>Maria's Recommendations</h2>
-            <ul>
-                <li>
-                    <h3>Ergonomic Office Chair</h3>
-                    <p>Maintain proper posture during long hours at your desk.</p>
-                    <a href="https://amzn.to/41M2Qzb" target="_blank">Buy Now</a>
-                </li>
-                <li>
-                    <h3>Resistance Bands</h3>
-                    <p>Perfect for rebuilding strength with low-impact exercises.</p>
-                    <a href="https://amzn.to/3VN06xS" target="_blank">Buy Now</a>
-                </li>
-                <li>
-                    <h3>Yoga Mat</h3>
-                    <p>Essential for comfortable stretching and pilates routines.</p>
-                    <a href="https://amzn.to/3YogaMat" target="_blank">Buy Now</a>
-                </li>
-                <li>
-                    <h3>Portable Massage Tool</h3>
-                    <p>Relieve tension and relax muscles after a long day.</p>
-                    <a href="https://amzn.to/3ZNpODt" target="_blank">Buy Now</a>
-                </li>
-            </ul>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2024 PainFree Living. Inspiring recovery and wellness.</p>
-    </footer>
-</body>
-</html>
-
+{% block content %}
+<section class="intro">
+    <h1>Maria's Story</h1>
+    <p>
+        Meet Maria, a determined individual who faced debilitating back pain, frozen shoulder, and sciatica. Her journey is one of resilience, perseverance, and a testament to the power of proper care and effective tools.
+    </p>
+</section>
+<section class="challenge">
+    <h2>The Challenge</h2>
+    <p>
+        Maria's problems began with an intense fitness routine. Without adequate warm-ups, her enthusiasm turned into pain that gradually worsened. Simple activities like sitting or standing became unbearable. 
+        She developed herniated discs, sciatica, and frozen shoulder, leading to chronic pain in her lower back, neck, and limbs. Sleep and work became impossible, and the lack of movement caused weight gain during her recovery.
+    </p>
+</section>
+<section class="turnaround">
+    <h2>The Turning Point</h2>
+    <p>
+        After months of suffering, Maria discovered ergonomic tools and therapy products. Her journey began with a few essential items:
+    </p>
+    <ul>
+        <li><strong>Ergonomic Lumbar Cushion:</strong> Provided much-needed support while sitting, relieving pressure on her lower back.</li>
+        <li><strong>Twist Disk:</strong> Allowed her to start gentle core exercises, regaining strength and flexibility.</li>
+        <li><strong>Knee Pillow:</strong> Improved her sleep posture, reducing strain on her spine and hips.</li>
+        <li><strong>Portable Massage Tool:</strong> Helped her manage muscle tension and pain during recovery.</li>
+    </ul>
+    <p>
+        Alongside these tools, Maria introduced regular stretching routines and low-impact exercises like yoga and pilates. These small but consistent efforts brought a gradual yet significant improvement in her mobility and well-being.
+    </p>
+</section>
+<section class="success">
+    <h2>Reclaiming Her Life</h2>
+    <p>
+        Today, Maria is back to doing the things she loves. Thanks to ergonomic tools and her commitment to self-care, she enjoys her work, sleeps peacefully, and moves without pain. Her journey proves that with the right mindset and resources, recovery is possible.
+    </p>
+    <p>
+        Maria shares her story to inspire others to prioritize their health and explore effective solutions for pain management. Her advice? <strong>"Take care of your body before it forces you to."</strong>
+    </p>
+</section>
+<section class="recommended-tools">
+    <h2>Maria's Recommendations</h2>
+    <ul>
+        <li>
+            <h3>Ergonomic Office Chair</h3>
+            <p>Maintain proper posture during long hours at your desk.</p>
+            <a href="https://amzn.to/41M2Qzb" target="_blank">Buy Now</a>
+        </li>
+        <li>
+            <h3>Resistance Bands</h3>
+            <p>Perfect for rebuilding strength with low-impact exercises.</p>
+            <a href="https://amzn.to/3VN06xS" target="_blank">Buy Now</a>
+        </li>
+        <li>
+            <h3>Yoga Mat</h3>
+            <p>Essential for comfortable stretching and pilates routines.</p>
+            <a href="https://amzn.to/3YogaMat" target="_blank">Buy Now</a>
+        </li>
+        <li>
+            <h3>Portable Massage Tool</h3>
+            <p>Relieve tension and relax muscles after a long day.</p>
+            <a href="https://amzn.to/3ZNpODt" target="_blank">Buy Now</a>
+        </li>
+    </ul>
+</section>
+{% endblock %}
