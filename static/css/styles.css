@@ -29,12 +29,18 @@ header {
     margin: 0 auto;
 }
 
-.logo {
-    max-width: 200px;
-    height: auto;
-    margin-right: 10px;
-    display: block;
+.logo-container {
+    text-align: center; /* Центриране на логото в страницата */
+    margin: 20px auto; /* Отстояние от другите елементи */
 }
+
+.logo {
+    max-width: 100%; /* Уверява се, че логото не надвишава ширината на контейнера */
+    width: 320px; /* Задава фиксирана ширина на логото */
+    height: auto; /* Поддържа пропорциите */
+    display: inline-block; /* За да се подравни централно */
+}
+
 
 .site-title {
     font-size: 1.8em;
