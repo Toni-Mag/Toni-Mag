@@ -1,80 +1,52 @@
-.logo {
-    max-width: 250px;
-    height: auto;
-    margin: 0 auto;
-    display: block;
+.site-title {
+    font-size: 36px; /* Увеличаване на заглавието */
+    text-align: center;
+    color: white;
 }
-@media (max-width: 768px) {
-    .header-content {
-        flex-direction: column;
-        text-align: center;
-    }
-}
-@media (max-width: 768px) {
-    .logo {
-        width: 150px; /* По-малък размер за мобилни устройства */
-    }
-}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+/* Основни настройки */
 body {
     font-family: 'OpenDyslexic', Arial, sans-serif;
-    background-color: #f8f9fa;
-    color: #212529;
+    background-color: #f5f5f5; /* Светъл фон за по-добра четимост */
+    color: #333; /* Тъмен текст за контраст */
     margin: 0;
     padding: 0;
     line-height: 1.6;
 }
 
+/* Хедър */
 header {
-    background-color: #343a40;
+    background: linear-gradient(90deg, #007bff, #0056b3); /* Приятен градиент */
     color: white;
     padding: 10px 20px;
-}
-
-   .logo {
-    width: 250px;
-    height: auto; /* Запазва пропорциите */
-    max-width: 100%; /* Не надвишава ширината на контейнера */
-
-
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .header-content {
-    display: flex; /* За подравняване на логото и заглавието в една линия */
-    align-items: center; /* Вертикално подравняване */
-    justify-content: space-between; /* Равно разпределение */
-    padding: 10px 20px; /* Отстояние */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo {
+    max-width: 200px;
+    height: auto;
+    margin-right: 10px;
+    display: block;
 }
 
 .site-title {
-    font-size: 24px; /* Размер на заглавието */
-    margin-left: 10px; /* Разстояние между логото и заглавието */
-    color: white; /* Цвят на текста */
-
-
-}
-
-
-
-aside {
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #f8f9fa;
-    border-radius: 8px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-
-
-}
-
-.site-title {
-    font-size: 24px;
+    font-size: 1.8em;
+    margin-left: 10px;
     color: white;
-    margin-left: 20px; /* Разстояние между логото и заглавието */
 }
 
+/* Навигация */
 nav {
     background-color: #f8f9fa;
     padding: 10px 0;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 nav ul {
@@ -89,7 +61,8 @@ nav ul {
 nav ul li a {
     text-decoration: none;
     color: #007bff;
-    font-size: 18px;
+    font-size: 16px;
+    font-weight: bold;
     transition: color 0.3s ease;
 }
 
@@ -98,6 +71,7 @@ nav ul li a:hover {
     border-bottom: 2px solid #007bff;
 }
 
+/* Основно съдържание */
 main {
     background: white;
     padding: 20px;
@@ -107,36 +81,10 @@ main {
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-footer {
-    background-color: #343a40;
-    color: white;
-    text-align: center;
-    padding: 10px;
-    margin-top: 20px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-@media (max-width: 768px) {
-    nav ul {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .logo {
-        height: 40px;
-    }
-
-    .site-title {
-        font-size: 18px;
-    }
-
-    main, header, footer {
-        box-shadow: none;
-    }
-}
+/* Календар */
 .calendar {
-    background-color: #f8f9fa;
-    border: 1px solid #ddd;
+    background-color: #eaf4ff;
+    border: 1px solid #b3d8ff;
     padding: 15px;
     border-radius: 8px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
@@ -145,7 +93,7 @@ footer {
 
 .calendar h3 {
     font-size: 1.5em;
-    color: #343a40;
+    color: #0056b3;
     margin-bottom: 10px;
     text-align: center;
 }
@@ -167,9 +115,40 @@ footer {
 
 .calendar ul li strong {
     color: #007bff;
-}@media (max-width: 768px) {
+}
+
+/* Футър */
+footer {
+    background: linear-gradient(90deg, #0056b3, #007bff);
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: 20px;
+    box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Медийни запитвания за мобилни устройства */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
     .logo {
-        width: 150px; /* По-малко лого за малки екрани */
+        max-width: 150px;
+    }
+
+    .site-title {
+        font-size: 1.4em;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    main, header, footer {
+        box-shadow: none;
     }
 }
 
