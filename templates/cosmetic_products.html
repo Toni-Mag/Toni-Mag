@@ -3,50 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore our curated list of cosmetic products for health and beauty.">
+    <meta name="keywords" content="cosmetic products, skincare, haircare, beauty products, personal care">
+    <meta name="author" content="PainFree Living">
     <title>Cosmetic Products - PainFree Living</title>
-    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <img src="{{ url_for('static', filename='images/logo_painfreeliving.png') }}" alt="Logo">
+
 </head>
 <body>
     <header>
-        <h1>Cosmetic Products</h1>
-        <p>Explore our reviews of products for problematic skin and soothing creams.</p>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/back-pain">Back Pain Solutions</a></li>
+                <li><a href="/exercise-tools">Exercise Tools</a></li>
+                <li><a href="/cosmetic-products" class="active">Cosmetic Products</a></li>
+                <li><a href="/maria_story">Maria's Story</a></li>
+                <li><a href="/products">Products</a></li>
+                <li><a href="/forum">Forum</a></li>
+            </ul>
+        </nav>
     </header>
-    <nav>
-        <a href="/">Home</a> |
-    <a href="/back-pain">Back Pain Solutions</a> |
-    <a href="/exercise-tools">Exercise Tools</a> |
-    <a href="/cosmetic-products">Cosmetic Products</a> |
-    <a href="/products">Products</a> |
-    <a href="/maria_story">Maria's Story</a> |
-    <a href="/forum">Forum</a>
-    </nav>
     <main>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4812899709232388"
-     crossorigin="anonymous"></script>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-1B5CD02XYJ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-1B5CD02XYJ');
-</script>
-
-        <h2>Top Cosmetic Products</h2>
-        <ul>
-            <li>
-                <h3><a href="https://amzn.to/3ZRqDLq" target="_blank">Cooling Gel for Pain Relief</a></h3>
-                <p>Instantly soothes muscle tension and provides relief.</p>
-            </li>
-            <li>
-                <h3><a href="https://amzn.to/4iQxY6y" target="_blank">Seborrhea Cream</a></h3>
-                <p>Effective solution for managing problematic skin.</p>
-            </li>
-        </ul>
+        <h1>Cosmetic Products</h1>
+        <p>
+            Caring for your skin, hair, and overall appearance has never been easier. Our curated selection of cosmetic products is designed to enhance your natural beauty and improve your daily self-care routine.
+        </p>
+        <section>
+            <h2>Our Recommendations</h2>
+            <ul>
+                <li>
+                    <h3>Hydrating Facial Cream</h3>
+                    <p>
+                        This hydrating cream is a must-have for keeping your skin moisturized and radiant all day long. Enriched with natural ingredients, it protects your skin from dryness and promotes a healthy glow.
+                    </p>
+                    <a href="https://amzn.to/3HydratingCream" target="_blank">Buy Now on Amazon</a>
+                </li>
+                <li>
+                    <h3>Anti-Aging Serum</h3>
+                    <p>
+                        Reduce fine lines and wrinkles with this powerful serum. It works overnight to rejuvenate your skin, leaving you looking refreshed and youthful.
+                    </p>
+                    <a href="https://amzn.to/3AntiAgingSerum" target="_blank">Buy Now on Amazon</a>
+                </li>
+                <li>
+                    <h3>Revitalizing Shampoo</h3>
+                    <p>
+                        Nourish your hair from root to tip with this revitalizing shampoo. It strengthens your hair, adds shine, and promotes healthy growth.
+                    </p>
+                    <a href="https://amzn.to/3RevitalizingShampoo" target="_blank">Buy Now on Amazon</a>
+                </li>
+                <li>
+                    <h3>Moisturizing Body Lotion</h3>
+                    <p>
+                        Keep your skin smooth and hydrated with this lightweight body lotion. Perfect for daily use, it absorbs quickly and leaves a subtle fragrance.
+                    </p>
+                    <a href="https://amzn.to/3BodyLotion" target="_blank">Buy Now on Amazon</a>
+                </li>
+                <li>
+                    <h3>Foot Cream for Cracked Heels</h3>
+                    <p>
+                        Soothe and repair cracked heels with this intensive foot cream. Its nourishing formula restores softness and comfort to your feet.
+                    </p>
+                    <a href="https://amzn.to/3FootCream" target="_blank">Buy Now on Amazon</a>
+                </li>
+                <li>
+                    <h3>Exfoliating Face Scrub</h3>
+                    <p>
+                        Reveal brighter, smoother skin with this gentle exfoliating scrub. Removes dead skin cells and promotes cell renewal for a glowing complexion.
+                    </p>
+                    <a href="https://amzn.to/3FaceScrub" target="_blank">Buy Now on Amazon</a>
+                </li>
+            </ul>
+        </section>
+        <section>
+            <h2>Why These Products?</h2>
+            <p>
+                The products we recommend are carefully selected for their proven effectiveness and positive customer feedback. Each item is designed to address specific beauty and self-care needs, making them perfect for enhancing your daily routine.
+            </p>
+            <p>
+                Whether you're looking to hydrate your skin, strengthen your hair, or pamper yourself with luxurious body care, our collection has you covered.
+            </p>
+        </section>
+        <section>
+            <h2>Add Your Links</h2>
+            <p>
+                If you’re ready to add your own affiliate links, simply replace the "Buy Now on Amazon" links above with your personalized links. This way, you can share these amazing products with others while earning commissions.
+            </p>
+        </section>
     </main>
     <footer>
-        <p>&copy; 2024 PainFree Living. All rights reserved.</p>
+        <p>&copy; 2024 PainFree Living. Elevating your beauty and self-care journey.</p>
     </footer>
 </body>
 </html>

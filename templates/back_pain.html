@@ -3,75 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Discover effective solutions for back pain and sciatica. Explore our expert advice and product reviews to find relief.">
-    <meta name="keywords" content="back pain, sciatica, lumbar support, ergonomic chairs, pain relief">
+    <meta name="description" content="Discover effective solutions for back pain and ergonomic tools.">
+    <meta name="keywords" content="back pain, lumbar support, ergonomic tools, posture improvement">
+    <meta name="author" content="PainFree Living">
     <title>Back Pain Solutions - PainFree Living</title>
-    <link rel="stylesheet" href="/static/styles.css">
+   <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <img src="{{ url_for('static', filename='images/logo_painfreeliving.png') }}" alt="Logo">
+
 </head>
 <body>
     <header>
-        <h1>Back Pain Solutions</h1>
-        <p>Discover effective ways to relieve back pain and sciatica, and improve your quality of life.</p>
+        <nav>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/back-pain">Back Pain Solutions</a></li>
+        <li><a href="/exercise-tools">Exercise Tools</a></li>
+        <li><a href="/cosmetic-products">Cosmetic Products</a></li>
+        <li><a href="/maria_story">Maria's Story</a></li>
+        <li><a href="/products">Products</a></li>
+        <li><a href="/forum">Forum</a></li>
+    </ul>
+        </nav>
     </header>
-      <nav>
-        <a href="/">Home</a> |
-    <a href="/back-pain">Back Pain Solutions</a> |
-    <a href="/exercise-tools">Exercise Tools</a> |
-    <a href="/cosmetic-products">Cosmetic Products</a> |
-    <a href="/products">Products</a> |
-    <a href="/maria_story">Maria's Story</a> |
-    <a href="/forum">Forum</a>
-    </nav>
     <main>
-        <section class="intro">
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-1B5CD02XYJ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-1B5CD02XYJ');
-</script>
-     
- <h2>Top Products for Back Pain Relief</h2>
-            <p>
-                Whether you're working at a desk or relaxing at home, prolonged sitting can lead to discomfort and even chronic back pain. 
-                Our carefully selected products are designed to provide relief and promote better posture.
-            </p>
-        </section>
-        <section class="product-reviews">
+        <h1>Back Pain Solutions</h1>
+        <p>Find the best tools and tips for managing back pain and improving your posture.</p>
+        <section>
+            <h2>Recommended Products</h2>
             <ul>
+     {% for product in products %}
                 <li>
-                    <h3><a href="https://amzn.to/3ZQ4kWn" target="_blank">Lumbar Support Cushion</a></h3>
-                    <p>Offers excellent support for your lower back during long sitting sessions. Perfect for office chairs, car seats, and more.</p>
+                    <h3>Ergonomic Office Chair</h3>
+                    <p>Designed to keep your spine aligned and reduce strain during long hours of sitting.</p>
+                    <a href="https://amzn.to/41M2Qzb" target="_blank">Buy Now on Amazon</a>
                 </li>
                 <li>
-                    <h3><a href="https://amzn.to/4iH8j0l" target="_blank">Ergonomic Office Chair</a></h3>
-                    <p>Designed to keep your spine aligned, reduce strain, and provide all-day comfort for work or relaxation.</p>
+                    <h3>Lumbar Support Cushion</h3>
+                    <p>Perfect for office chairs, car seats, or sofas, this cushion ensures optimal lumbar support.</p>
+                    <a href="https://amzn.to/41M2Qzb" target="_blank">Buy Now on Amazon</a>
                 </li>
+      {% endfor %}
             </ul>
         </section>
-        <section class="additional-info">
-            <h2>Why Invest in Ergonomic Solutions?</h2>
-            <p>
-                Poor posture and prolonged sitting are leading causes of back pain and sciatica. Ergonomic tools not only alleviate pain 
-                but also prevent future discomfort. Features like lumbar support and adjustable settings can make a significant difference 
-                in your daily comfort and productivity.
-            </p>
-        </section>
-        <section class="call-to-action">
-            <h2>Take Control of Your Back Health</h2>
-            <p>Don’t let back pain disrupt your life. Explore our recommended products and start your journey to a pain-free living today.</p>
-            <a href="https://amzn.to/4gmbEAe" target="_blank" class="buy-button">View Lumbar Support Cushion</a>
-            <a href="https://amzn.to/401Xq1H" target="_blank" class="buy-button">View Ergonomic Chair</a>
-        </section>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4812899709232388"
-     crossorigin="anonymous"></script>
     </main>
     <footer>
-        <p>&copy; 2024 PainFree Living. All rights reserved.</p>
+        <p>&copy; 2024 PainFree Living</p>
     </footer>
 </body>
 </html>

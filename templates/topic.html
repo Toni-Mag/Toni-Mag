@@ -3,51 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Discuss pain relief solutions and share your experiences.">
-    <title>{{ topic.title }} - Forum</title>
-    <link rel="stylesheet" href="/static/styles.css">
+    <meta name="description" content="Join the discussion about ergonomic tools and tips for back pain relief.">
+    <meta name="keywords" content="forum topic, ergonomic tools, discussions, back pain relief">
+    <meta name="author" content="PainFree Living">
+    <title>Discussion: Ergonomic Disc - PainFree Living</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <img src="{{ url_for('static', filename='images/logo_painfreeliving.png') }}" alt="Logo">
+
 </head>
 <body>
     <header>
-        <h1>{{ topic.title }}</h1>
-        <p>Discuss solutions and share experiences.</p>
+        <nav>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/back-pain">Back Pain Solutions</a></li>
+        <li><a href="/exercise-tools">Exercise Tools</a></li>
+        <li><a href="/cosmetic-products">Cosmetic Products</a></li>
+        <li><a href="/maria_story">Maria's Story</a></li>
+        <li><a href="/products">Products</a></li>
+        <li><a href="/forum">Forum</a></li>
+    </ul>
+       </nav>
     </header>
     <main>
-        <section class="posts">
-            <h3>Posts</h3>
+        <h1>How to Use the Ergonomic Disc</h1>
+        <p>This topic explores the benefits and proper techniques for using the ergonomic disc.</p>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/example" frameborder="0" allowfullscreen></iframe>
+        <section>
+            <h2>Comments</h2>
             <ul>
-                {% for post in topic.posts %}
-                <li>
-                    <strong>{{ post.name }}</strong>: {{ post.message }}
-                    <ul>
-                        {% for reply in post.replies %}
-                        <li><strong>{{ reply.name }}:</strong> {{ reply.message }}</li>
-                        {% endfor %}
-                    </ul>
-                    <form action="/reply/{{ topic.id }}/{{ post.id }}" method="POST">
-                        <label for="reply-name-{{ post.id }}">Your Name:</label>
-                        <input type="text" id="reply-name-{{ post.id }}" name="name" required>
-                        <label for="reply-message-{{ post.id }}">Your Reply:</label>
-                        <textarea id="reply-message-{{ post.id }}" name="message" rows="2" required></textarea>
-                        <button type="submit">Reply</button>
-                    </form>
-                </li>
-                {% endfor %}
+                <li><strong>Anna:</strong> This disc has really improved my posture!</li>
+                <li><strong>John:</strong> How often should I use it? Any tips?</li>
             </ul>
         </section>
-        <section class="new-post">
-            <h3>Add a New Post</h3>
-            <form action="/add-post/{{ topic.id }}" method="POST">
+        <section>
+            <h2>Add a Comment</h2>
+            <form action="add-comment" method="POST">
                 <label for="name">Your Name:</label>
                 <input type="text" id="name" name="name" required>
-                <label for="message">Message:</label>
-                <textarea id="message" name="message" rows="4" required></textarea>
-                <button type="submit">Add Post</button>
+                <br>
+                <label for="comment">Comment:</label>
+                <textarea id="comment" name="comment" rows="4" required></textarea>
+                <br>
+                <button type="submit">Submit</button>
             </form>
         </section>
     </main>
     <footer>
-        <p>&copy; 2024 PainFree Living. All rights reserved.</p>
+        <p>&copy; 2024 PainFree Living</p>
     </footer>
 </body>
 </html>

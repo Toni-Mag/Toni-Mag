@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=OpenDyslexic&display=swap">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="{{ url_for('static', filename='js/calendar.js') }}" defer></script>
+</head>
+<body>
+    <header>
+    <div class="header-content">
+        <img src="{{ url_for('static', filename='images/logo_painfreeliving.png') }}" alt="Logo" class="logo">
+        <h1 class="site-title">PainFree Living</h1>
+        <p class="site-subtitle">Your trusted guide for health and wellness</p>
+    </div>
+</header>
+
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/back-pain">Back Pain Solutions</a></li>
+            <li><a href="/exercise-tools">Exercise Tools</a></li>
+            <li><a href="/cosmetic-products">Cosmetic Products</a></li>
+            <li><a href="/maria_story">Maria's Story</a></li>
+            <li><a href="/products">Products</a></li>
+            <li><a href="/forum">Forum</a></li>
+        </ul>
+    </nav>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <aside>
+        <div class="calendar">
+            <h3>Upcoming Holidays</h3>
+            <div id="calendar-display">Loading...</div>
+        </div>
+    </aside>
+    <footer>
+        <p>&copy; 2025 PainFree Living. All rights reserved.</p>
+    </footer>
+</body>
+</html>

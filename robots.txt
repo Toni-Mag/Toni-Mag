@@ -1,0 +1,10 @@
+User-agent: *
+Disallow: /admin
+Disallow: /user-data
+Disallow: /private
+Allow: /
+Disallow: /*.txt$
+Disallow: /*.log$
+Disallow: /*.sql$
+Sitemap: https://toni-mag.onrender.com/sitemap.xml
+Host: https://toni-mag.onrender.com

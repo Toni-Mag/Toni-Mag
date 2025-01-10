@@ -1,74 +1,109 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Browse our selection of products for a pain-free lifestyle.">
-    <meta name="keywords" content="products, pain-free, ergonomic tools, knee pillow, massage tools, office chair, twist disk">
+    <meta name="description" content="Browse our selection of products to enhance your health, comfort, and fitness journey.">
+    <meta name="keywords" content="home fitness, ergonomic tools, pain relief, yoga mats, exercise tools, compact equipment">
+    <meta name="author" content="PainFree Living">
     <title>Products - PainFree Living</title>
-    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <img src="{{ url_for('static', filename='images/logo_painfreeliving.png') }}" alt="Logo">
+
 </head>
 <body>
     <header>
-        <h1>Our Top Products</h1>
-        <p>Explore our curated selection of tools designed to enhance your comfort and well-being.</p>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/back-pain">Back Pain Solutions</a></li>
+                <li><a href="/exercise-tools">Exercise Tools</a></li>
+                <li><a href="/cosmetic-products">Cosmetic Products</a></li>
+                <li><a href="/maria_story">Maria's Story</a></li>
+                <li><a href="/products" class="active">Products</a></li>
+                <li><a href="/forum">Forum</a></li>
+            </ul>
+        </nav>
     </header>
-    <nav>
-        <a href="/">Home</a> |
-    <a href="/back-pain">Back Pain Solutions</a> |
-    <a href="/exercise-tools">Exercise Tools</a> |
-    <a href="/cosmetic-products">Cosmetic Products</a> |
-    <a href="/products">Products</a> |
-    <a href="/maria_story">Maria's Story</a> |
-    <a href="/forum">Forum</a>
-    </nav>
     <main>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4812899709232388"
-     crossorigin="anonymous"></script>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-1B5CD02XYJ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-1B5CD02XYJ');
-</script>
-
-        <h2>Products for a Pain-Free Lifestyle</h2>
-        <ul>
-            <li><a href="https://amzn.to/3BHb8O8" target="_blank">Knee Pillow</a></li>
-            <li><a href="https://amzn.to/41M2Qzb" target="_blank">Ergonomic Office Chair</a></li>
-            <li><a href="https://amzn.to/3ZNpODt" target="_blank">Portable Massage Tool</a></li>
-        </ul>
-
-        <article>
-            <h3>Twist Disk: Your Compact Fitness Companion</h3>
+        <h1>Products for a Healthier, Happier You</h1>
+        <p>
+            Discover tools that empower you to take care of your body and maintain your fitness, even in the comfort of your home. These products are designed to help you stay active, reduce discomfort, and achieve your health goals effortlessly.
+        </p>
+        <section>
+            <h2>Featured Products</h2>
+            <ul>
+                <li>
+                    <h3>Ergonomic Office Chair</h3>
+                    <p>
+                        This chair is a must-have for anyone spending long hours at a desk. It promotes better posture, reduces back strain, and ensures you remain comfortable throughout the day.
+                    </p>
+                    <a href="https://amzn.to/41M2Qzb" target="_blank">Buy Now on Amazon</a>
+                </li>
+                <li>
+                    <h3>Resistance Bands</h3>
+                    <p>
+                        Ideal for strength training and flexibility, resistance bands are a versatile addition to your home gym. Compact and easy to use, they help tone muscles and improve overall fitness.
+                    </p>
+                    <a href="https://amzn.to/3VN06xS" target="_blank">Buy Now on Amazon</a>
+                </li>
+                <li>
+                    <h3>Yoga Mat</h3>
+                    <p>
+                        Whether it’s for yoga, pilates, or stretching, a quality yoga mat is essential. Non-slip and cushioned, it provides the perfect surface for your floor exercises.
+                    </p>
+                    <a href="https://a.co/d/i8dPMR5" target="_blank">Buy Now on Amazon</a>
+                </li>
+                <li>
+                    <h3>Twist Disk</h3>
+                    <p>
+                        A simple yet powerful tool for strengthening your core and improving balance. Perfect for quick workouts at home, this disk is compact, durable, and easy to store.
+                    </p>
+                    <a href="https://amzn.to/3ZRSawx" target="_blank">Buy Now on Amazon</a>
+                </li>
+                <li>
+                    <h3>Portable Massage Tool</h3>
+                    <p>
+                        Relieve muscle tension and stress with this portable massage tool. Lightweight and effective, it’s your personal masseuse at home.
+                    </p>
+                    <a href="https://amzn.to/3ZNpODt" target="_blank">Buy Now on Amazon</a>
+                </li>
+                <li>
+                    <h3>Knee Pillow</h3>
+                    <p>
+                        Improve sleep posture and relieve joint pressure with a knee pillow. It’s perfect for side sleepers and anyone seeking better alignment during rest.
+                    </p>
+                    <a href="https://amzn.to/3BHb8O8" target="_blank">Buy Now on Amazon</a>
+                </li>
+            </ul>
+        </section>
+        <section class="benefits">
+            <h2>Why Choose These Tools?</h2>
             <p>
-                Looking for an easy and convenient way to add movement to your day? The <strong>Twist Disk</strong> is an excellent tool for anyone aiming to stay active without bulky gym equipment. Here’s why this simple yet effective device stands out:
+                Investing in these products means investing in your health and well-being. They provide:
             </p>
             <ul>
-                <li><strong>Everyday Fitness:</strong> Start your mornings right with a quick 15-minute session. No need for a gym membership—just step on the disk and twist your way to an energized day.</li>
-                <li><strong>Muscle Engagement:</strong> Train your legs, abdomen, hips, and buttocks while improving your balance and core strength.</li>
-                <li><strong>Portable Design:</strong> Lightweight and easy to store, it’s perfect for small spaces. Simply tuck it under the sofa when not in use!</li>
-                <li><strong>Durable Build:</strong> Made from high-quality polypropylene, it’s built to last and supports up to 125 kg of weight.</li>
+                <li><strong>Convenience:</strong> Stay fit without leaving the comfort of your home.</li>
+                <li><strong>Efficiency:</strong> Compact and easy-to-use tools that fit seamlessly into your daily routine.</li>
+                <li><strong>Versatility:</strong> Suitable for all fitness levels and designed to target various muscle groups.</li>
+                <li><strong>Health Benefits:</strong> Reduce stress, improve flexibility, and enhance overall physical health.</li>
             </ul>
-            <h4>What Users Say</h4>
-            <blockquote>
-                <p><em>"Perfect for waking up in the morning and adding movement to your day."</em> – Verified User</p>
-                <p><em>"I burned 150 calories in just 12 minutes! Great for a quick cardio session."</em> – Fitness Enthusiast</p>
-                <p><em>"Compact and easy to store, it fits perfectly under my sofa when not in use."</em> – Amazon Reviewer</p>
-            </blockquote>
             <p>
-                Whether you’re looking to add light cardio to your routine or firm up those muscles, the Twist Disk offers a simple and effective solution. Explore its benefits and make it a part of your fitness journey today.
+                Whether you’re recovering from an injury, maintaining a healthy lifestyle, or starting your fitness journey, these tools are here to help.
+            </p>
+        </section>
+        <section class="stay-active">
+            <h2>Take Control of Your Health Today</h2>
+            <p>
+                With the right tools at your fingertips, you can stay active, build strength, and boost your confidence—all without stepping foot outside. These products are designed with your needs in mind, ensuring that every workout is both effective and enjoyable.
             </p>
             <p>
-                <a href="https://amzn.to/3ZRSawx" target="_blank">Click here</a> to get your own Twist Disk and start your journey toward better fitness and balance!
+                Don’t wait for the perfect time to start. Make the most of every moment with tools that inspire movement and health, right in your own home.
             </p>
-        </article>
+        </section>
     </main>
     <footer>
-        <p>&copy; 2024 PainFree Living. All rights reserved.</p>
+        <p>&copy; 2024 PainFree Living. Empowering you to live a pain-free, active life.</p>
     </footer>
 </body>
 </html>
