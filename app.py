@@ -55,7 +55,8 @@ def get_sidebar_content():
     year, month = today.year, today.month
     month_days, holiday_dates = generate_calendar(year, month)
     month_name = calendar.month_name[month]
-    today_date = today.strftime("Today: %A, %B %d, %Y")
+    today_date = today.strftime("%A, %B %d, %Y")  # Премахваме "Today:"
+
 
     return {
         "ads": [

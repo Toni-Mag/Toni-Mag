@@ -86,7 +86,7 @@ nav a:hover, nav a:focus {
 .content-container {
     display: flex;
     gap: 20px;
-    max-width: 1200px;
+    max-width: 1300px;
     margin: 20px auto;
     padding: 20px;
     background: white;
@@ -142,24 +142,24 @@ main {
     background-color: var(--background-color);
     border: 2px solid var(--primary-color);
     border-radius: 8px;
-    padding: 15px;
+    padding: 10px; /* Намалете padding за по-компактен дизайн */
     margin-top: 20px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    width: 100%;
+    width: 100%; /* Гарантира, че календарът ще се адаптира към ширината на страничната лента */
 }
 
 .calendar h3 {
-    font-size: 1.2em;
+    font-size: 1.1em; /* Намалете размера на заглавието */
     color: var(--primary-color);
     margin-bottom: 10px;
     text-align: center;
 }
 
 .calendar .today-date {
-    font-size: 1em;
+    font-size: 0.9em; /* Намалете размера на текста за днешната дата */
     text-align: center;
     color: var(--secondary-color);
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     font-weight: bold;
 }
 
@@ -167,11 +167,12 @@ main {
     width: 100%;
     border-collapse: collapse;
     table-layout: fixed;
+    font-size: 0.8em; /* Намалете размера на текста в таблицата */
 }
 
 .calendar th, .calendar td {
     text-align: center;
-    padding: 8px;
+    padding: 5px; /* Намалете padding за клетките */
     border: 1px solid var(--border-color);
     word-wrap: break-word;
 }
@@ -197,6 +198,7 @@ main {
     background-color: var(--hover-color);
     cursor: pointer;
 }
+
 
 /* Бутони */
 button {
