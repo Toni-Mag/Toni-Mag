@@ -1,39 +1,61 @@
 {% extends "base.html" %}
 
 {% block content %}
-<section class="intro">
-    <h1>{{ topic.title }}</h1>
-    <p>{{ topic.description }}</p>
-</section>
-<section class="comments">
-    <h2>Comments</h2>
-    <ul>
-        {% if topic.comments %}
-            {% for comment in topic.comments %}
-            <li>
-                <strong>{{ comment.author }}:</strong> {{ comment.text }}
-            </li>
+<h1>{{ topic.title }}</h1>
+<ul id="posts">
+    {% for post in topic.posts %}
+    <li>
+        <strong>{{ post.name }}:</strong> {{ post.message }}
+        <ul>
+            {% for reply in post.replies %}
+            <li><strong>{{ reply.name }}:</strong> {{ reply.message }}</li>
             {% endfor %}
-        {% else %}
-            <p>No comments yet. Be the first to comment!</p>
-        {% endif %}
-    </ul>
-</section>
-<section class="add-comment">
-    <h2>Add a Comment</h2>
-    <form action="{{ url_for('add_post', topic_id=topic.id) }}" method="POST">
-        <!-- CSRF защита (ако се използва Flask-WTF) -->
-        {{ form.hidden_tag() }}
-        
-        <label for="name">Your Name:</label>
-        <input type="text" id="name" name="name" placeholder="Enter your name" required>
-        <br>
-        
-        <label for="comment">Comment:</label>
-        <textarea id="comment" name="comment" rows="4" placeholder="Write your comment here" required></textarea>
-        <br>
-        
-        <button type="submit">Submit Comment</button>
-    </form>
-</section>
+        </ul>
+    </li>
+    {% endfor %}
+</ul>
+<form id="addPostForm">
+    <label for="name">Your Name:</label>
+    <input type="text" id="name" name="name" required>
+    <br>
+    <label for="message">Your Message:</label>
+    <textarea id="message" name="message" required></textarea>
+    <br>
+    <button type="submit">Add Post</button>
+</form>
+
+<script>
+    document.getElementById("addPostForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Спри стандартното поведение на формата
+
+        const name = document.getElementById("name").value;
+        const message = document.getElementById("message").value;
+
+        // Изпрати AJAX заявка
+        fetch(`/api/add-post/{{ topic.id }}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ name: name, message: message })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Добавяне на новия пост към списъка
+                const postsList = document.getElementById("posts");
+                const newPost = document.createElement("li");
+                newPost.innerHTML = `<strong>${data.post.name}:</strong> ${data.post.message}`;
+                postsList.appendChild(newPost);
+
+                // Изчистване на формата
+                document.getElementById("name").value = "";
+                document.getElementById("message").value = "";
+            } else {
+                alert(data.error || "An error occurred");
+            }
+        })
+        .catch(error => console.error("Error:", error));
+    });
+</script>
 {% endblock %}

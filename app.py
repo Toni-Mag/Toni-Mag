@@ -1,6 +1,28 @@
-from flask import Flask, render_template, request, redirect, url_for, abort
+from flask import Flask, render_template, request, redirect, url_for, abort, jsonify
+import calendar
+from datetime import datetime
 
 app = Flask(__name__)
+
+# Данни за празници
+holidays = [
+    {"date": "2025-01-01", "name": "New Year's Day"},
+    {"date": "2025-03-17", "name": "St. Patrick's Day"},
+    {"date": "2025-05-12", "name": "Mother's Day"},
+    {"date": "2025-06-16", "name": "Father's Day"},
+    {"date": "2025-12-25", "name": "Christmas Day"}
+]
+
+# Генериране на календар
+def generate_calendar(year, month, holidays):
+    """Генерира календар с отбелязани празници."""
+    cal = calendar.Calendar()
+    month_days = cal.monthdayscalendar(year, month)
+    holiday_dates = {
+        datetime.strptime(h["date"], "%Y-%m-%d").day: h["name"]
+        for h in holidays if datetime.strptime(h["date"], "%Y-%m-%d").month == month
+    }
+    return month_days, holiday_dates
 
 # Форум данни
 forum_topics = [
@@ -36,45 +58,18 @@ def generate_new_id(collection):
 # Роутове
 @app.route("/")
 def home():
-    """Начална страница."""
-    return render_template("home.html")
-
-@app.route("/products")
-def products():
-    """Продуктова страница."""
-    return render_template("products.html")
-
-@app.route("/back-pain")
-def back_pain():
-    """Страница за проблеми с гърба."""
-    products = [
-        {
-            "name": "Ergonomic Office Chair",
-            "description": "Designed to keep your spine aligned and reduce strain during long hours of sitting.",
-            "link": "https://amzn.to/41M2Qzb"
-        },
-        {
-            "name": "Lumbar Support Cushion",
-            "description": "Perfect for office chairs, car seats, or sofas, this cushion ensures optimal lumbar support.",
-            "link": "https://amzn.to/41M2Qzb"
-        }
-    ]
-    return render_template("back_pain.html", products=products)
-
-@app.route("/exercise-tools")
-def exercise_tools():
-    """Страница за фитнес уреди."""
-    return render_template("exercise_tools.html")
-
-@app.route("/cosmetic-products")
-def cosmetic_products():
-    """Страница за козметични продукти."""
-    return render_template("cosmetic_products.html")
-
-@app.route("/maria_story")
-def maria_story():
-    """Историята на Мария."""
-    return render_template("maria_story.html")
+    """Начална страница с календар."""
+    today = datetime.today()
+    year, month = today.year, today.month
+    month_days, holiday_dates = generate_calendar(year, month, holidays)
+    month_name = calendar.month_name[month]
+    return render_template(
+        "home.html",
+        month_days=month_days,
+        holiday_dates=holiday_dates,
+        month_name=month_name,
+        year=year
+    )
 
 @app.route("/forum")
 def forum():
@@ -92,27 +87,27 @@ def topic(topic_id):
 @app.route("/add-topic", methods=["POST"])
 def add_topic():
     """Добавяне на нова тема."""
-    title = request.form.get("title")
+    title = request.json.get("title")
     if not title:
-        abort(400, description="Title is required")
+        return jsonify({"success": False, "error": "Title is required"}), 400
     new_topic = {
         "id": generate_new_id(forum_topics),
         "title": title,
         "posts": []
     }
     forum_topics.append(new_topic)
-    return redirect(url_for("forum"))
+    return jsonify({"success": True, "topic": new_topic})
 
 @app.route("/add-post/<int:topic_id>", methods=["POST"])
 def add_post(topic_id):
     """Добавяне на пост в тема."""
     topic = find_topic_by_id(topic_id)
     if not topic:
-        abort(404, description="Topic not found")
-    name = request.form.get("name")
-    message = request.form.get("message")
+        return jsonify({"success": False, "error": "Topic not found"}), 404
+    name = request.json.get("name")
+    message = request.json.get("message")
     if not (name and message):
-        abort(400, description="Name and message are required")
+        return jsonify({"success": False, "error": "Name and message are required"}), 400
     new_post = {
         "id": generate_new_id(topic["posts"]),
         "name": name,
@@ -120,23 +115,24 @@ def add_post(topic_id):
         "replies": []
     }
     topic["posts"].append(new_post)
-    return redirect(url_for("topic", topic_id=topic_id))
+    return jsonify({"success": True, "post": new_post})
 
 @app.route("/reply/<int:topic_id>/<int:post_id>", methods=["POST"])
 def reply(topic_id, post_id):
     """Добавяне на отговор в пост."""
     topic = find_topic_by_id(topic_id)
     if not topic:
-        abort(404, description="Topic not found")
+        return jsonify({"success": False, "error": "Topic not found"}), 404
     post = find_post_by_id(topic, post_id)
     if not post:
-        abort(404, description="Post not found")
-    reply_name = request.form.get("name")
-    reply_message = request.form.get("message")
+        return jsonify({"success": False, "error": "Post not found"}), 404
+    reply_name = request.json.get("name")
+    reply_message = request.json.get("message")
     if not (reply_name and reply_message):
-        abort(400, description="Name and message are required")
-    post["replies"].append({"name": reply_name, "message": reply_message})
-    return redirect(url_for("topic", topic_id=topic_id))
+        return jsonify({"success": False, "error": "Name and message are required"}), 400
+    reply = {"name": reply_name, "message": reply_message}
+    post["replies"].append(reply)
+    return jsonify({"success": True, "reply": reply})
 
 # Грешки
 @app.errorhandler(404)

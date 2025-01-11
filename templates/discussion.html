@@ -2,29 +2,69 @@
 
 {% block content %}
 <section class="intro">
-    <h1>How to Use the Ergonomic Disc</h1>
-    <p>This topic explores the benefits and proper techniques for using the ergonomic disc.</p>
+    <h1>{{ topic.title }}</h1>
+    <p>{{ topic.description }}</p>
 </section>
+
 <section class="video">
     <iframe width="560" height="315" src="https://www.youtube.com/embed/example" frameborder="0" allowfullscreen></iframe>
 </section>
+
 <section class="comments">
     <h2>Comments</h2>
-    <ul>
-        <li><strong>Anna:</strong> This disc has really improved my posture!</li>
-        <li><strong>John:</strong> How often should I use it? Any tips?</li>
+    <ul id="comments-list">
+        {% for comment in topic.comments %}
+        <li><strong>{{ comment.author }}:</strong> {{ comment.text }}</li>
+        {% endfor %}
     </ul>
 </section>
+
 <section class="add-comment">
     <h2>Add a Comment</h2>
-    <form action="add-comment" method="POST">
+    <form id="addCommentForm">
         <label for="name">Your Name:</label>
-        <input type="text" id="name" name="name" required>
+        <input type="text" id="name" name="name" placeholder="Enter your name" required>
         <br>
         <label for="comment">Comment:</label>
-        <textarea id="comment" name="comment" rows="4" required></textarea>
+        <textarea id="comment" name="comment" placeholder="Write your comment here" rows="4" required></textarea>
         <br>
         <button type="submit">Submit</button>
     </form>
 </section>
+
+<script>
+    document.getElementById("addCommentForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Спри стандартното поведение на формата
+
+        const name = document.getElementById("name").value;
+        const comment = document.getElementById("comment").value;
+
+        // Изпрати AJAX заявка
+        fetch(`/api/add-comment/{{ topic.id }}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ name: name, comment: comment })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Добавяне на новия коментар към списъка
+                const commentsList = document.getElementById("comments-list");
+                const newComment = document.createElement("li");
+                newComment.innerHTML = `<strong>${data.comment.author}:</strong> ${data.comment.text}`;
+                commentsList.appendChild(newComment);
+
+                // Изчистване на формата
+                document.getElementById("name").value = "";
+                document.getElementById("comment").value = "";
+            } else {
+                alert(data.error || "An error occurred");
+            }
+        })
+        .catch(error => console.error("Error:", error));
+    });
+</script>
 {% endblock %}
+

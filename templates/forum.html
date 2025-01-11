@@ -4,23 +4,55 @@
 <h2>Forum Topics</h2>
 <section class="forum-topics">
     <h3>Current Topics</h3>
-    <ul>
+    <ul id="topics-list">
+        {% for topic in topics %}
         <li>
-            <h3><a href="topic.html">How to Use the Ergonomic Disc</a></h3>
-            <p>Discussion about the benefits and techniques for using the ergonomic disc.</p>
+            <h3><a href="/topic/{{ topic.id }}">{{ topic.title }}</a></h3>
+            <p>Posts: {{ topic.posts | length }}</p>
         </li>
-        <li>
-            <h3><a href="topic.html">Best Exercises for Lower Back Pain</a></h3>
-            <p>Share your favorite exercises or ask for advice.</p>
-        </li>
+        {% endfor %}
     </ul>
 </section>
+
 <section class="new-topic">
     <h3>Start a New Discussion</h3>
-    <form action="/add-topic" method="POST">
+    <form id="addTopicForm">
         <label for="title">Topic Title:</label>
-        <input type="text" id="title" name="title" required>
+        <input type="text" id="title" name="title" placeholder="Enter topic title" required>
         <button type="submit">Create Topic</button>
     </form>
 </section>
+
+<script>
+    document.getElementById("addTopicForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Спри стандартното поведение на формата
+
+        const title = document.getElementById("title").value;
+
+        // Изпрати AJAX заявка
+        fetch("/api/add-topic", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ title: title })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Добавяне на новата тема към списъка
+                const topicsList = document.getElementById("topics-list");
+                const newTopic = document.createElement("li");
+                newTopic.innerHTML = `<h3><a href="/topic/${data.topic.id}">${data.topic.title}</a></h3><p>Posts: 0</p>`;
+                topicsList.appendChild(newTopic);
+
+                // Изчистване на формата
+                document.getElementById("title").value = "";
+            } else {
+                alert(data.error || "An error occurred");
+            }
+        })
+        .catch(error => console.error("Error:", error));
+    });
+</script>
 {% endblock %}
