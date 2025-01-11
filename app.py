@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, jsonify, abort
 import calendar
 from datetime import datetime
-from functools import lru_cache
 from flask_caching import Cache
 
 # Flask App Configuration
@@ -38,7 +37,6 @@ forum_topics = [
 ]
 
 # Utility Functions
-@lru_cache(maxsize=12)
 def generate_calendar(year, month):
     """Generate a calendar with highlighted holidays."""
     cal = calendar.Calendar()
@@ -49,16 +47,13 @@ def generate_calendar(year, month):
     }
     return month_days, holiday_dates
 
-def find_topic_by_id(topic_id):
-    """Find a forum topic by ID."""
-    return next((topic for topic in forum_topics if topic["id"] == topic_id), None)
-
-def generate_new_id(collection):
-    """Generate a new unique ID for a collection."""
-    return max((item["id"] for item in collection), default=0) + 1
-
 def get_sidebar_content():
-    """Generate sidebar content such as ads, videos, and affiliate banners."""
+    """Generate sidebar content including ads, videos, and calendar."""
+    today = datetime.today()
+    year, month = today.year, today.month
+    month_days, holiday_dates = generate_calendar(year, month)
+    month_name = calendar.month_name[month]
+
     return {
         "ads": [
             {"title": "Health Gadgets", "url": "#", "image": "/static/images/ad1.jpg"},
@@ -67,27 +62,25 @@ def get_sidebar_content():
         "videos": [
             {"title": "Daily Exercises", "url": "https://www.youtube.com/embed/example1"},
             {"title": "Stress Relief Tips", "url": "https://www.youtube.com/embed/example2"}
-        ]
+        ],
+        "calendar": {
+            "month_days": month_days,
+            "holiday_dates": holiday_dates,
+            "month_name": month_name,
+            "year": year
+        }
     }
+
+def find_topic_by_id(topic_id):
+    """Find a forum topic by ID."""
+    return next((topic for topic in forum_topics if topic["id"] == topic_id), None)
 
 # Routes
 @app.route("/")
-@cache.cached(timeout=60)
 def home():
     """Home page with calendar and sidebar."""
-    today = datetime.today()
-    year, month = today.year, today.month
-    month_days, holiday_dates = generate_calendar(year, month)
-    month_name = calendar.month_name[month]
     sidebar_content = get_sidebar_content()
-    return render_template(
-        "home.html",
-        month_days=month_days,
-        holiday_dates=holiday_dates,
-        month_name=month_name,
-        year=year,
-        sidebar=sidebar_content
-    )
+    return render_template("home.html", sidebar=sidebar_content)
 
 @app.route("/back-pain")
 def back_pain():

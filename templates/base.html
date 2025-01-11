@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Join discussions and share your experience with pain relief products and solutions.">
-    <meta name="keywords" content="forum, pain relief, back pain, ergonomic tools">
+    <meta name="description" content="PainFree Living - Your guide to a pain-free life.">
+    <meta name="keywords" content="health, pain relief, forum, ergonomic tools, calendar, videos">
     <title>{% block title %}PainFree Living{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
@@ -17,7 +17,7 @@
         </div>
     </header>
     <nav>
-        <ul class="navigation-menu">
+        <ul>
             <li><a href="/">Home</a></li>
             <li><a href="/back-pain">Back Pain Solutions</a></li>
             <li><a href="/exercise-tools">Exercise Tools</a></li>
@@ -27,20 +27,18 @@
             <li><a href="/forum">Forum</a></li>
         </ul>
     </nav>
-    <div class="content-layout">
-        <!-- Sidebar with Calendar -->
+    <div class="content-container">
+        <main>
+            {% block content %}
+            {% endblock %}
+        </main>
         <aside class="sidebar">
-            <h2>Resources</h2>
-            <ul>
-                <li><a href="https://example.com/ad1" target="_blank">Ad/Link 1</a></li>
-                <li><a href="https://example.com/ad2" target="_blank">Ad/Link 2</a></li>
-            </ul>
-            <div class="video-section">
-                <h2>Videos</h2>
-                <iframe width="300" height="200" src="https://www.youtube.com/embed/example1" frameborder="0" allowfullscreen></iframe>
-            </div>
-            <div class="calendar">
-                <h3>Calendar for {{ month_name }} {{ year }}</h3>
+            <section class="video-section">
+                <h3>Featured Video</h3>
+                <iframe width="100%" height="200" src="https://www.youtube.com/embed/example" frameborder="0" allowfullscreen></iframe>
+            </section>
+            <section class="calendar">
+                <h3>Calendar for {{ sidebar.calendar.month_name }} {{ sidebar.calendar.year }}</h3>
                 <table>
                     <thead>
                         <tr>
@@ -54,13 +52,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for week in month_days %}
+                        {% for week in sidebar.calendar.month_days %}
                         <tr>
                             {% for day in week %}
                             {% if day == 0 %}
                             <td class="empty"></td>
-                            {% elif day in holiday_dates %}
-                            <td class="holiday">{{ day }}<br><small>{{ holiday_dates[day] }}</small></td>
+                            {% elif day in sidebar.calendar.holiday_dates %}
+                            <td class="holiday">{{ day }}<br><small>{{ sidebar.calendar.holiday_dates[day] }}</small></td>
                             {% else %}
                             <td>{{ day }}</td>
                             {% endif %}
@@ -69,13 +67,8 @@
                         {% endfor %}
                     </tbody>
                 </table>
-            </div>
+            </section>
         </aside>
-        <!-- Main Content -->
-        <main>
-            {% block content %}
-            {% endblock %}
-        </main>
     </div>
     <footer>
         <p>&copy; 2025 PainFree Living. All rights reserved.</p>
