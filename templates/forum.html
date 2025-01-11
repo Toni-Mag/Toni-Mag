@@ -1,35 +1,46 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Forum Topics</h2>
-<section class="forum-topics">
-    <h3>Current Topics</h3>
-    <ul id="topics-list">
-        {% for topic in topics %}
-        <li>
-            <h3><a href="/topic/{{ topic.id }}">{{ topic.title }}</a></h3>
-            <p>Posts: {{ topic.posts | length }}</p>
-        </li>
-        {% endfor %}
-    </ul>
-</section>
+<section class="forum">
+    <h2>Forum Topics</h2>
+    <section class="forum-topics">
+        <h3>Current Topics</h3>
+        <ul id="topics-list">
+            {% if topics %}
+                {% for topic in topics %}
+                <li>
+                    <h3><a href="/topic/{{ topic.id }}">{{ topic.title }}</a></h3>
+                    <p>Posts: {{ topic.posts | length }}</p>
+                </li>
+                {% endfor %}
+            {% else %}
+                <li>No topics available. Start a new discussion!</li>
+            {% endif %}
+        </ul>
+    </section>
 
-<section class="new-topic">
-    <h3>Start a New Discussion</h3>
-    <form id="addTopicForm">
-        <label for="title">Topic Title:</label>
-        <input type="text" id="title" name="title" placeholder="Enter topic title" required>
-        <button type="submit">Create Topic</button>
-    </form>
+    <section class="new-topic">
+        <h3>Start a New Discussion</h3>
+        <form id="addTopicForm">
+            <label for="title">Topic Title:</label>
+            <input type="text" id="title" name="title" placeholder="Enter topic title" required>
+            <button type="submit">Create Topic</button>
+        </form>
+    </section>
 </section>
 
 <script>
     document.getElementById("addTopicForm").addEventListener("submit", function(event) {
-        event.preventDefault(); // Спри стандартното поведение на формата
+        event.preventDefault(); // Prevent the default form submission
 
-        const title = document.getElementById("title").value;
+        const title = document.getElementById("title").value.trim(); // Trim spaces from input
 
-        // Изпрати AJAX заявка
+        if (!title) {
+            alert("Topic title is required.");
+            return;
+        }
+
+        // Send AJAX request
         fetch("/api/add-topic", {
             method: "POST",
             headers: {
@@ -40,19 +51,25 @@
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                // Добавяне на новата тема към списъка
+                // Add the new topic to the list
                 const topicsList = document.getElementById("topics-list");
                 const newTopic = document.createElement("li");
-                newTopic.innerHTML = `<h3><a href="/topic/${data.topic.id}">${data.topic.title}</a></h3><p>Posts: 0</p>`;
+                newTopic.innerHTML = `
+                    <h3><a href="/topic/${data.topic.id}">${data.topic.title}</a></h3>
+                    <p>Posts: 0</p>
+                `;
                 topicsList.appendChild(newTopic);
 
-                // Изчистване на формата
+                // Clear the form
                 document.getElementById("title").value = "";
             } else {
-                alert(data.error || "An error occurred");
+                alert(data.error || "An error occurred while creating the topic.");
             }
         })
-        .catch(error => console.error("Error:", error));
+        .catch(error => {
+            console.error("Error:", error);
+            alert("An unexpected error occurred. Please try again.");
+        });
     });
 </script>
 {% endblock %}

@@ -1,37 +1,55 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>{{ topic.title }}</h1>
-<ul id="posts">
-    {% for post in topic.posts %}
-    <li>
-        <strong>{{ post.name }}:</strong> {{ post.message }}
-        <ul>
-            {% for reply in post.replies %}
-            <li><strong>{{ reply.name }}:</strong> {{ reply.message }}</li>
+<section class="topic-details">
+    <h1>{{ topic.title }}</h1>
+    <ul id="posts">
+        {% if topic.posts %}
+            {% for post in topic.posts %}
+            <li>
+                <strong>{{ post.name }}:</strong> {{ post.message }}
+                {% if post.replies %}
+                <ul>
+                    {% for reply in post.replies %}
+                    <li><strong>{{ reply.name }}:</strong> {{ reply.message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </li>
             {% endfor %}
-        </ul>
-    </li>
-    {% endfor %}
-</ul>
-<form id="addPostForm">
-    <label for="name">Your Name:</label>
-    <input type="text" id="name" name="name" required>
-    <br>
-    <label for="message">Your Message:</label>
-    <textarea id="message" name="message" required></textarea>
-    <br>
-    <button type="submit">Add Post</button>
-</form>
+        {% else %}
+            <li>No posts yet. Be the first to post!</li>
+        {% endif %}
+    </ul>
+</section>
+
+<section class="add-post">
+    <h2>Add a Post</h2>
+    <form id="addPostForm">
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+        <br>
+        <label for="message">Your Message:</label>
+        <textarea id="message" name="message" placeholder="Write your message here" rows="4" required></textarea>
+        <br>
+        <button type="submit">Add Post</button>
+    </form>
+</section>
 
 <script>
     document.getElementById("addPostForm").addEventListener("submit", function(event) {
-        event.preventDefault(); // Спри стандартното поведение на формата
+        event.preventDefault(); // Prevent the default form submission
 
-        const name = document.getElementById("name").value;
-        const message = document.getElementById("message").value;
+        const name = document.getElementById("name").value.trim();
+        const message = document.getElementById("message").value.trim();
 
-        // Изпрати AJAX заявка
+        // Validate input fields
+        if (!name || !message) {
+            alert("Both name and message are required.");
+            return;
+        }
+
+        // Send AJAX request
         fetch(`/api/add-post/{{ topic.id }}`, {
             method: "POST",
             headers: {
@@ -42,20 +60,25 @@
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                // Добавяне на новия пост към списъка
+                // Add the new post to the list
                 const postsList = document.getElementById("posts");
                 const newPost = document.createElement("li");
-                newPost.innerHTML = `<strong>${data.post.name}:</strong> ${data.post.message}`;
+                newPost.innerHTML = `
+                    <strong>${data.post.name}:</strong> ${data.post.message}
+                `;
                 postsList.appendChild(newPost);
 
-                // Изчистване на формата
+                // Clear the form
                 document.getElementById("name").value = "";
                 document.getElementById("message").value = "";
             } else {
-                alert(data.error || "An error occurred");
+                alert(data.error || "An error occurred while adding the post.");
             }
         })
-        .catch(error => console.error("Error:", error));
+        .catch(error => {
+            console.error("Error:", error);
+            alert("An unexpected error occurred.");
+        });
     });
 </script>
 {% endblock %}

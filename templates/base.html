@@ -5,30 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Join discussions and share your experience with pain relief products and solutions.">
     <meta name="keywords" content="forum, pain relief, back pain, ergonomic tools">
-    <title>{{ title }}</title>
+    <title>{% block title %}PainFree Living{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            text-align: center;
-            padding: 8px;
-        }
-        th {
-            background-color: #f4f4f4;
-        }
-        .holiday {
-            background-color: #ffebcd;
-        }
-        .empty {
-            background-color: #f9f9f9;
-        }
-    </style>
 </head>
 <body>
     <header>
@@ -38,50 +17,66 @@
         </div>
     </header>
     <nav>
-        <a href="/">Home</a>
-        <a href="/back-pain">Back Pain Solutions</a>
-        <a href="/exercise-tools">Exercise Tools</a>
-        <a href="/cosmetic-products">Cosmetic Products</a>
-        <a href="/products">Products</a>
-        <a href="/maria_story">Maria's Story</a>
-        <a href="/forum">Forum</a>
-        <a href="/forum/topic/1">Discussion: Ergonomic Disc</a>
+        <ul class="navigation-menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/back-pain">Back Pain Solutions</a></li>
+            <li><a href="/exercise-tools">Exercise Tools</a></li>
+            <li><a href="/cosmetic-products">Cosmetic Products</a></li>
+            <li><a href="/products">Products</a></li>
+            <li><a href="/maria_story">Maria's Story</a></li>
+            <li><a href="/forum">Forum</a></li>
+        </ul>
     </nav>
-    <main>
-        {% block content %}
-        {% endblock %}
-        <aside class="calendar">
-            <h3>Calendar for {{ month_name }} {{ year }}</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Mon</th>
-                        <th>Tue</th>
-                        <th>Wed</th>
-                        <th>Thu</th>
-                        <th>Fri</th>
-                        <th>Sat</th>
-                        <th>Sun</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for week in month_days %}
-                    <tr>
-                        {% for day in week %}
-                        {% if day == 0 %}
-                        <td class="empty"></td>
-                        {% elif day in holiday_dates %}
-                        <td class="holiday">{{ day }}<br><small>{{ holiday_dates[day] }}</small></td>
-                        {% else %}
-                        <td>{{ day }}</td>
-                        {% endif %}
+    <div class="content-layout">
+        <!-- Sidebar with Calendar -->
+        <aside class="sidebar">
+            <h2>Resources</h2>
+            <ul>
+                <li><a href="https://example.com/ad1" target="_blank">Ad/Link 1</a></li>
+                <li><a href="https://example.com/ad2" target="_blank">Ad/Link 2</a></li>
+            </ul>
+            <div class="video-section">
+                <h2>Videos</h2>
+                <iframe width="300" height="200" src="https://www.youtube.com/embed/example1" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="calendar">
+                <h3>Calendar for {{ month_name }} {{ year }}</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Mon</th>
+                            <th>Tue</th>
+                            <th>Wed</th>
+                            <th>Thu</th>
+                            <th>Fri</th>
+                            <th>Sat</th>
+                            <th>Sun</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for week in month_days %}
+                        <tr>
+                            {% for day in week %}
+                            {% if day == 0 %}
+                            <td class="empty"></td>
+                            {% elif day in holiday_dates %}
+                            <td class="holiday">{{ day }}<br><small>{{ holiday_dates[day] }}</small></td>
+                            {% else %}
+                            <td>{{ day }}</td>
+                            {% endif %}
+                            {% endfor %}
+                        </tr>
                         {% endfor %}
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </aside>
-    </main>
+        <!-- Main Content -->
+        <main>
+            {% block content %}
+            {% endblock %}
+        </main>
+    </div>
     <footer>
         <p>&copy; 2025 PainFree Living. All rights reserved.</p>
     </footer>
