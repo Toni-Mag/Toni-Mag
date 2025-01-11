@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify, abort
+from flask import Flask, render_template, abort
 import calendar
 from datetime import datetime
 from flask_caching import Cache
@@ -37,6 +37,7 @@ forum_topics = [
 ]
 
 # Utility Functions
+@cache.cached(timeout=60)
 def generate_calendar(year, month):
     """Generate a calendar with highlighted holidays."""
     cal = calendar.Calendar()
@@ -47,13 +48,14 @@ def generate_calendar(year, month):
     }
     return month_days, holiday_dates
 
+@cache.cached(timeout=60)
 def get_sidebar_content():
     """Generate sidebar content including ads, videos, and calendar."""
     today = datetime.today()
     year, month = today.year, today.month
     month_days, holiday_dates = generate_calendar(year, month)
     month_name = calendar.month_name[month]
-    today_date = today.strftime("%A, %B %d, %Y")  # Example: "Friday, January 13, 2025"
+    today_date = today.strftime("Today: %A, %B %d, %Y")
 
     return {
         "ads": [
@@ -80,49 +82,41 @@ def find_topic_by_id(topic_id):
 # Routes
 @app.route("/")
 def home():
-    """Home page with calendar and sidebar."""
     sidebar_content = get_sidebar_content()
     return render_template("home.html", sidebar=sidebar_content)
 
 @app.route("/back-pain")
 def back_pain():
-    """Back Pain Solutions page."""
     sidebar_content = get_sidebar_content()
     return render_template("back_pain.html", sidebar=sidebar_content)
 
 @app.route("/exercise-tools")
 def exercise_tools():
-    """Exercise Tools page."""
     sidebar_content = get_sidebar_content()
     return render_template("exercise_tools.html", sidebar=sidebar_content)
 
 @app.route("/cosmetic-products")
 def cosmetic_products():
-    """Cosmetic Products page."""
     sidebar_content = get_sidebar_content()
     return render_template("cosmetic_products.html", sidebar=sidebar_content)
 
 @app.route("/products")
 def products():
-    """Products page."""
     sidebar_content = get_sidebar_content()
     return render_template("products.html", sidebar=sidebar_content)
 
 @app.route("/maria_story")
 def maria_story():
-    """Maria's Story page."""
     sidebar_content = get_sidebar_content()
     return render_template("maria_story.html", sidebar=sidebar_content)
 
 @app.route("/forum")
 def forum():
-    """Forum page."""
     sidebar_content = get_sidebar_content()
     return render_template("forum.html", topics=forum_topics, sidebar=sidebar_content)
 
 @app.route("/forum/topic/<int:topic_id>")
 def topic(topic_id):
-    """Topic details page."""
     topic = find_topic_by_id(topic_id)
     if not topic:
         abort(404, description="Topic not found")
