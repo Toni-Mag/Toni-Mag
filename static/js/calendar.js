@@ -1,16 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
     const calendarDisplay = document.getElementById('calendar-display');
 
-    // Празници за 2025 година
+    // Празници и банкови празници за 2025 година
     const holidays2025 = {
         "1-1": "New Year's Day",
-        "2-14": "Valentine's Day",
-        "3-17": "St. Patrick's Day",
-        "4-5": "Easter Sunday",
-        "5-25": "Memorial Day",
-        "7-4": "Independence Day",
-        "11-27": "Thanksgiving Day",
-        "12-25": "Christmas Day"
+        "3-17": "St. Patrick's Day (Northern Ireland)",
+        "4-18": "Good Friday",
+        "4-21": "Easter Monday",
+        "5-5": "Early May Bank Holiday",
+        "5-26": "Spring Bank Holiday",
+        "7-12": "Battle of the Boyne (Northern Ireland)",
+        "8-25": "Summer Bank Holiday",
+        "11-5": "Guy Fawkes Night",
+        "12-25": "Christmas Day",
+        "12-26": "Boxing Day"
     };
 
     const today = new Date();
@@ -29,6 +32,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const [month, day] = date.split('-').map(Number);
             const holidayDate = new Date(today.getFullYear(), month - 1, day);
             return holidayDate > today;
+        })
+        .sort(([dateA], [dateB]) => {
+            const [monthA, dayA] = dateA.split('-').map(Number);
+            const [monthB, dayB] = dateB.split('-').map(Number);
+            return new Date(today.getFullYear(), monthA - 1, dayA) - new Date(today.getFullYear(), monthB - 1, dayB);
         })
         .slice(0, 5);
 

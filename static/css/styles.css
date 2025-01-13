@@ -1,61 +1,32 @@
-/* Основни променливи */
-:root {
-    --primary-color: #0055cc;
-    --secondary-color: #003399;
-    --error-color: #cc0000;
-    --background-color: #f6f6f6;
-    --text-color: #333;
-    --border-color: #e0e0e0;
-    --highlight-color: #ffebcd;
-    --hover-color: #d9edf7;
-    --font-family: 'Arial', sans-serif;
-    --banner-bg: #f1f1f1;
-    --banner-border: #cccccc;
-    --footer-color: #ffffff;
-}
-
-/* Основни настройки */
+/* Общи стилове */
 body {
-    font-family: var(--font-family);
-    background-color: var(--background-color);
-    color: var(--text-color);
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    line-height: 1.6;
+    background-color: #f4f4f4;
+    color: #333;
 }
 
 /* Хедър */
 header {
-    background-color: var(--primary-color);
+    background-color: #0056b3;
     color: white;
-    padding: 20px;
+    padding: 10px 20px;
+    text-align: center;
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    align-items: center;
-    border-bottom: 5px solid var(--secondary-color);
 }
 
-.logo-container {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.logo {
-    max-width: 100px;
-    height: auto;
-}
-
-header h1 {
-    font-size: 1.8em;
-    margin: 0;
+header .logo {
+    height: 50px;
+    margin-right: 15px;
 }
 
 /* Навигация */
 nav {
-    background-color: var(--primary-color);
-    padding: 10px;
-    text-align: center;
+    background-color: #0047a3;
+    overflow: hidden;
 }
 
 nav ul {
@@ -64,200 +35,109 @@ nav ul {
     margin: 0;
     display: flex;
     justify-content: center;
-    gap: 15px;
 }
 
-nav a {
+nav ul li {
+    margin: 0;
+}
+
+nav ul li a {
     color: white;
     text-decoration: none;
-    padding: 8px 15px;
-    border-radius: 4px;
-    font-size: 1em;
-    transition: background-color 0.3s, color 0.3s;
+    padding: 14px 20px;
+    display: block;
+    text-align: center;
 }
 
-nav a:hover, nav a:focus {
-    background-color: var(--secondary-color);
-    color: var(--background-color);
-    outline: none;
+nav ul li a:hover {
+    background-color: #003580;
 }
 
-/* Основно съдържание */
+/* Главен контейнер */
 .content-container {
     display: flex;
-    gap: 20px;
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 20px;
-    background: white;
-    border: 2px solid var(--border-color);
-    border-radius: 8px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 20px;
 }
 
-/* Основна зона за съдържание */
 main {
     flex: 3;
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
     padding: 20px;
-}
-
-/* Банери и странично съдържание */
-.sidebar {
-    flex: 1;
-    background-color: var(--banner-bg);
-    border: 1px solid var(--banner-border);
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
-    width: 100%;
-}
-
-.sidebar h3 {
-    text-align: center;
-    color: var(--primary-color);
-    margin-bottom: 10px;
-}
-
-.sidebar .banner {
-    margin-bottom: 15px;
-    text-align: center;
-    padding: 10px;
     background-color: white;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-right: 20px;
 }
 
-.sidebar .banner iframe {
-    width: 100%;
+aside.sidebar {
+    flex: 1;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Видео секция */
+.video-section {
+    margin-bottom: 20px;
+}
+
+.video-section iframe {
     border: none;
+    border-radius: 5px;
 }
 
 /* Календар */
 .calendar {
-    background-color: var(--background-color);
-    border: 2px solid var(--primary-color);
-    border-radius: 8px;
-    padding: 10px; /* Намалете padding за по-компактен дизайн */
     margin-top: 20px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    width: 100%; /* Гарантира, че календарът ще се адаптира към ширината на страничната лента */
-}
-
-.calendar h3 {
-    font-size: 1.1em; /* Намалете размера на заглавието */
-    color: var(--primary-color);
-    margin-bottom: 10px;
-    text-align: center;
-}
-
-.calendar .today-date {
-    font-size: 0.9em; /* Намалете размера на текста за днешната дата */
-    text-align: center;
-    color: var(--secondary-color);
-    margin-bottom: 10px;
-    font-weight: bold;
 }
 
 .calendar table {
     width: 100%;
     border-collapse: collapse;
-    table-layout: fixed;
-    font-size: 0.8em; /* Намалете размера на текста в таблицата */
+    text-align: center;
 }
 
 .calendar th, .calendar td {
-    text-align: center;
-    padding: 5px; /* Намалете padding за клетките */
-    border: 1px solid var(--border-color);
-    word-wrap: break-word;
+    border: 1px solid #ddd;
+    padding: 8px;
 }
 
-.calendar th {
-    background-color: var(--border-color);
-    color: var(--text-color);
+.calendar .holiday {
+    background-color: #ffcccc;
+    color: #b30000;
 }
 
-.calendar td.holiday {
-    background-color: var(--highlight-color);
-    color: var(--error-color);
+.calendar .today-date {
     font-weight: bold;
+    margin-bottom: 10px;
 }
 
-.calendar td.empty {
-    background-color: var(--background-color);
-    padding: 0;
-    border: none;
-}
-
-.calendar td:hover {
-    background-color: var(--hover-color);
-    cursor: pointer;
-}
-
-
-/* Бутони */
-button {
-    background-color: var(--primary-color);
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-button:hover {
-    background-color: var(--secondary-color);
-}
-
-/* Футър */
-footer {
-    background-color: var(--secondary-color);
-    color: var(--footer-color);
-    text-align: center;
-    padding: 10px 20px;
+/* Реклами */
+.ads {
     margin-top: 20px;
-    border-top: 2px solid var(--border-color);
 }
 
-/* Адаптивност */
-@media (max-width: 768px) {
-    header {
-        flex-direction: column;
-        text-align: center;
-    }
+.ads .ad {
+    margin-bottom: 15px;
+    text-align: center;
+}
 
-    .logo {
-        max-width: 80px;
-    }
+.ads .ad img {
+    max-width: 100%;
+    border-radius: 5px;
+}
 
-    nav ul {
-        flex-direction: column;
-        gap: 10px;
-    }
+.ads .ad p {
+    margin-top: 5px;
+}
+.delete-post {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
 
-    nav a {
-        margin: 0;
-        padding: 5px 10px;
-        font-size: 0.9em;
-    }
-
-    .content-container {
-        flex-direction: column;
-    }
-
-    .sidebar {
-        max-width: 100%;
-    }
-
-    .calendar td, .calendar th {
-        font-size: 0.8em;
-        padding: 5px;
-    }
+.delete-post:hover {
+    background-color: darkred;
 }

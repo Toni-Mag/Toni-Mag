@@ -1,84 +1,115 @@
 {% extends "base.html" %}
 
 {% block content %}
-<section class="topic-details">
+<section class="topic">
     <h1>{{ topic.title }}</h1>
-    <ul id="posts">
+<ul>
+    {% for post in posts %}
+    <li>
+        <strong>{{ post.author }}:</strong> {{ post.message }}
+        <!-- Add comments functionality here -->
+    </li>
+    {% endfor %}
+</ul>
+<form id="addPostForm">
+    <input type="text" id="author" placeholder="Your Name">
+    <textarea id="message" placeholder="Your Message"></textarea>
+    <button type="submit">Add Post</button>
+</form>
+
+    <h2>{{ topic.title }}</h2>
+    <p>{{ topic.description }}</p>
+
+    <!-- Списък с публикации -->
+    <section id="posts">
+        <h3>Posts</h3>
         {% if topic.posts %}
-            {% for post in topic.posts %}
-            <li>
-                <strong>{{ post.name }}:</strong> {{ post.message }}
-                {% if post.replies %}
-                <ul>
-                    {% for reply in post.replies %}
-                    <li><strong>{{ reply.name }}:</strong> {{ reply.message }}</li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
-            </li>
+            <ul>
+                {% for post in topic.posts %}
+                <li>
+                    <strong>{{ post.name }}:</strong> {{ post.message }}
+                    <button onclick="deletePost({{ topic.id }}, {{ post.id }})">Delete</button>
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No posts yet. Be the first to post!</p>
+        {% endif %}
+    </section>
+
+    <!-- Добавяне на публикация -->
+    <section id="add-post">
+        <h3>Add a Post</h3>
+        <form id="addPostForm">
+            <label for="name">Your Name (optional):</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name">
+            <br>
+            <label for="message">Your Message:</label>
+            <textarea id="message" name="message" placeholder="Write your message here" rows="4" required></textarea>
+            <br>
+            <button type="submit">Add Post</button>
+        </form>
+    </section>
+
+    <!-- Секция за коментари -->
+<section class="comments">
+    <h2>Comments</h2>
+    <ul id="comments-list">
+        {% if topic.comments %}
+            {% for comment in topic.comments %}
+                <li><strong>{{ comment.author }}:</strong> {{ comment.text }}</li>
             {% endfor %}
         {% else %}
-            <li>No posts yet. Be the first to post!</li>
+            <li>No comments yet. Be the first to comment!</li>
         {% endif %}
     </ul>
 </section>
 
-<section class="add-post">
-    <h2>Add a Post</h2>
-    <form id="addPostForm">
+<section class="add-comment">
+    <h3>Add a Comment</h3>
+    <form id="addCommentForm">
         <label for="name">Your Name:</label>
-        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+        <input type="text" id="name" name="name" placeholder="Enter your name">
         <br>
-        <label for="message">Your Message:</label>
-        <textarea id="message" name="message" placeholder="Write your message here" rows="4" required></textarea>
+        <label for="comment">Comment:</label>
+        <textarea id="comment" name="comment" placeholder="Write your comment here" rows="4" required></textarea>
         <br>
-        <button type="submit">Add Post</button>
+        <button type="submit">Submit</button>
     </form>
 </section>
 
+
+<script src="{{ url_for('static', filename='js/forum.js') }}"></script>
+
 <script>
-    document.getElementById("addPostForm").addEventListener("submit", function(event) {
-        event.preventDefault(); // Prevent the default form submission
-
-        const name = document.getElementById("name").value.trim();
-        const message = document.getElementById("message").value.trim();
-
-        // Validate input fields
-        if (!name || !message) {
-            alert("Both name and message are required.");
-            return;
-        }
-
-        // Send AJAX request
-        fetch(`/api/add-post/{{ topic.id }}`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ name: name, message: message })
+    function deletePost(topicId, postId) {
+        fetch(`/api/delete-post/${topicId}/${postId}`, {
+            method: "DELETE",
         })
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                // Add the new post to the list
-                const postsList = document.getElementById("posts");
-                const newPost = document.createElement("li");
-                newPost.innerHTML = `
-                    <strong>${data.post.name}:</strong> ${data.post.message}
-                `;
-                postsList.appendChild(newPost);
-
-                // Clear the form
-                document.getElementById("name").value = "";
-                document.getElementById("message").value = "";
+                alert("Post deleted successfully.");
+                location.reload();
             } else {
-                alert(data.error || "An error occurred while adding the post.");
+                alert(data.error || "An error occurred.");
             }
-        })
-        .catch(error => {
-            console.error("Error:", error);
-            alert("An unexpected error occurred.");
         });
-    });
+    }
+
+    function deleteComment(topicId, commentId) {
+        fetch(`/api/delete-comment/${topicId}/${commentId}`, {
+            method: "DELETE",
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert("Comment deleted successfully.");
+                location.reload();
+            } else {
+                alert(data.error || "An error occurred.");
+            }
+        });
+    }
 </script>
 {% endblock %}

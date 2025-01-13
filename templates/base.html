@@ -69,6 +69,15 @@
                     </tbody>
                 </table>
             </section>
+            <section class="ads">
+                <h3>Sponsored Ads</h3>
+                {% for ad in sidebar.ads %}
+                <div class="ad">
+                    <img src="{{ ad.image }}" alt="{{ ad.title }}">
+                    <p><a href="{{ ad.url }}">{{ ad.title }}</a></p>
+                </div>
+                {% endfor %}
+            </section>
         </aside>
     </div>
     <footer>

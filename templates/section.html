@@ -1,0 +1,12 @@
+<h1>{{ section.name }}</h1>
+<p>{{ section.description }}</p>
+<h2>Topics</h2>
+<ul>
+    {% for topic in topics %}
+    <li><a href="/forum/topic/{{ topic.id }}">{{ topic.title }}</a></li>
+    {% endfor %}
+</ul>
+<form id="addTopicForm">
+    <input type="text" id="title" placeholder="New Topic Title">
+    <button type="submit">Add Topic</button>
+</form>
