@@ -53,25 +53,30 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for week in sidebar.calendar.month_days %}
-                        <tr>
-                            {% for day in week %}
-                            {% if day == 0 %}
-                            <td class="empty"></td>
-                            {% elif day in sidebar.calendar.holiday_dates %}
-                            <td class="holiday">{{ day }}<br><small>{{ sidebar.calendar.holiday_dates[day] }}</small></td>
-                            {% else %}
-                            <td>{{ day }}</td>
-                            {% endif %}
-                            {% endfor %}
-                        </tr>
-                        {% endfor %}
-                    </tbody>
+        {% for week in sidebar.calendar.month_days %}
+        <tr>
+            {% for day in week %}
+            {% if day == 0 %}
+            <td></td>
+            {% else %}
+            <td>
+                {{ day }}
+                {% if day in sidebar.calendar.holiday_dates %}
+                <br>
+                <small>{{ sidebar.calendar.holiday_dates[day] }}</small>
+                {% endif %}
+            </td>
+            {% endif %}
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </tbody>
                 </table>
             </section>
             <section class="ads">
                 <h3>Sponsored Ads</h3>
                 {% for ad in sidebar.ads %}
+<iframe src="https://b.grabo.bg/?city=&affid=75827&size=300x300&output=iframe" width="300" height="300" style="width:300px; height:300px; border:0px solid; overflow:hidden;" border="0" frameborder="0" scrolling="no"></iframe>
                 <div class="ad">
                     <img src="{{ ad.image }}" alt="{{ ad.title }}">
                     <p><a href="{{ ad.url }}">{{ ad.title }}</a></p>

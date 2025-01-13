@@ -3,21 +3,6 @@
 {% block content %}
 <section class="topic">
     <h1>{{ topic.title }}</h1>
-<ul>
-    {% for post in posts %}
-    <li>
-        <strong>{{ post.author }}:</strong> {{ post.message }}
-        <!-- Add comments functionality here -->
-    </li>
-    {% endfor %}
-</ul>
-<form id="addPostForm">
-    <input type="text" id="author" placeholder="Your Name">
-    <textarea id="message" placeholder="Your Message"></textarea>
-    <button type="submit">Add Post</button>
-</form>
-
-    <h2>{{ topic.title }}</h2>
     <p>{{ topic.description }}</p>
 
     <!-- Списък с публикации -->
@@ -40,7 +25,7 @@
     <!-- Добавяне на публикация -->
     <section id="add-post">
         <h3>Add a Post</h3>
-        <form id="addPostForm">
+        <form action="/api/add-post/{{ topic.id }}" method="post">
             <label for="name">Your Name (optional):</label>
             <input type="text" id="name" name="name" placeholder="Enter your name">
             <br>
@@ -51,41 +36,130 @@
         </form>
     </section>
 
+
     <!-- Секция за коментари -->
-<section class="comments">
-    <h2>Comments</h2>
-    <ul id="comments-list">
-        {% if topic.comments %}
-            {% for comment in topic.comments %}
-                <li><strong>{{ comment.author }}:</strong> {{ comment.text }}</li>
-            {% endfor %}
-        {% else %}
-            <li>No comments yet. Be the first to comment!</li>
-        {% endif %}
-    </ul>
+    <section class="comments">
+        <h3>Comments</h3>
+        <ul id="comments-list">
+            {% if topic.comments %}
+                {% for comment in topic.comments %}
+                <li>
+                    <strong>{{ comment.author }}:</strong> {{ comment.text }}
+                    <button onclick="deleteComment({{ topic.id }}, {{ comment.id }})">Delete</button>
+                </li>
+                {% endfor %}
+            {% else %}
+                <li>No comments yet. Be the first to comment!</li>
+            {% endif %}
+        </ul>
+    </section>
+
+    <!-- Добавяне на коментар -->
+    <section id="add-comment">
+        <h3>Add a Comment</h3>
+        <form id="addCommentForm">
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name">
+            <br>
+            <label for="comment">Comment:</label>
+            <textarea id="comment" name="comment" placeholder="Write your comment here" rows="4" required></textarea>
+            <br>
+            <button type="submit">Submit</button>
+        </form>
+    </section>
 </section>
-
-<section class="add-comment">
-    <h3>Add a Comment</h3>
-    <form id="addCommentForm">
-        <label for="name">Your Name:</label>
-        <input type="text" id="name" name="name" placeholder="Enter your name">
-        <br>
-        <label for="comment">Comment:</label>
-        <textarea id="comment" name="comment" placeholder="Write your comment here" rows="4" required></textarea>
-        <br>
-        <button type="submit">Submit</button>
-    </form>
-</section>
-
-
-<script src="{{ url_for('static', filename='js/forum.js') }}"></script>
 
 <script>
-    function deletePost(topicId, postId) {
-        fetch(`/api/delete-post/${topicId}/${postId}`, {
-            method: "DELETE",
+    // Добавяне на публикация
+    document.getElementById("addPostForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const name = document.getElementById("name").value.trim() || "Anonymous";
+        const message = document.getElementById("message").value.trim();
+        const topicId = {{ topic.id }};
+
+        if (!message) {
+            alert("Message is required.");
+            return;
+        }
+
+        fetch(`/api/add-post/${topicId}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ name, message }),
         })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const postsList = document.getElementById("posts").querySelector("ul");
+                const newPost = document.createElement("li");
+                newPost.innerHTML = `
+                    <strong>${data.post.name}:</strong> ${data.post.message}
+                    <button onclick="deletePost(${topicId}, ${data.post.id})">Delete</button>
+                `;
+                postsList.appendChild(newPost);
+
+                // Изчистване на формата
+                document.getElementById("name").value = "";
+                document.getElementById("message").value = "";
+            } else {
+                alert(data.error || "An error occurred.");
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("An unexpected error occurred.");
+        });
+    });
+
+    // Добавяне на коментар
+    document.getElementById("addCommentForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const name = document.getElementById("name").value.trim() || "Anonymous";
+        const comment = document.getElementById("comment").value.trim();
+        const topicId = {{ topic.id }};
+
+        if (!comment) {
+            alert("Comment is required.");
+            return;
+        }
+
+        fetch(`/api/add-comment/${topicId}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ name, comment }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const commentsList = document.getElementById("comments-list");
+                const newComment = document.createElement("li");
+                newComment.innerHTML = `<strong>${data.comment.author}:</strong> ${data.comment.text}`;
+                commentsList.appendChild(newComment);
+
+                // Изчистване на формата
+                document.getElementById("name").value = "";
+                document.getElementById("comment").value = "";
+            } else {
+                alert(data.error || "An error occurred.");
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("An unexpected error occurred.");
+        });
+    });
+
+    // Изтриване на публикация
+    function deletePost(topicId, postId) {
+        if (!confirm("Are you sure you want to delete this post?")) return;
+
+        fetch(`/api/delete-post/${topicId}/${postId}`, { method: "DELETE" })
         .then(response => response.json())
         .then(data => {
             if (data.success) {
@@ -97,10 +171,11 @@
         });
     }
 
+    // Изтриване на коментар
     function deleteComment(topicId, commentId) {
-        fetch(`/api/delete-comment/${topicId}/${commentId}`, {
-            method: "DELETE",
-        })
+        if (!confirm("Are you sure you want to delete this comment?")) return;
+
+        fetch(`/api/delete-comment/${topicId}/${commentId}`, { method: "DELETE" })
         .then(response => response.json())
         .then(data => {
             if (data.success) {
