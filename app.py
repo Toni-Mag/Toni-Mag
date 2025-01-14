@@ -1,8 +1,25 @@
 from flask import Flask, render_template, request, jsonify, abort, redirect
 import calendar
 from datetime import datetime
+from flask_caching import Cache
 
+# Инициализация на приложението
 app = Flask(__name__)
+
+# Инициализация на кеша
+cache = Cache(app, config={'CACHE_TYPE': 'SimpleCache'})
+
+# Главна страница с кеширане
+@app.route("/")
+@cache.cached(timeout=300)
+def home():
+    return render_template("home.html", topics=forum_topics, sidebar=get_sidebar_content())
+
+# Пример за друга страница с кеширане
+@app.route("/forum")
+@cache.cached(timeout=300)
+def forum():
+    return render_template("forum.html", topics=forum_topics, sidebar=get_sidebar_content())
 
 # Фиктивна база данни за форумни теми
 forum_topics = [
@@ -156,8 +173,9 @@ def add_post(topic_id):
         abort(404, description="Topic not found")
 
     # Извличаме данните от формата
-    name = request.form.get("name", "Anonymous")
-    message = request.form.get("message")
+    data = request.get_json()
+    name = data.get("name", "Anonymous")
+    message = data.get("message")
 
     # Проверяваме дали има съобщение
     if not message:
@@ -222,16 +240,6 @@ def delete_post(topic_id, post_id):
 
     return jsonify({"success": True})
 
-
-# Главна страница
-@app.route("/")
-def home():
-    return render_template("home.html", topics=forum_topics, sidebar=get_sidebar_content())
-
-# Страница за форума
-@app.route("/forum")
-def forum():
-    return render_template("forum.html", topics=forum_topics, sidebar=get_sidebar_content())
 
 # Страница за конкретна тема
 @app.route("/forum/topic/<int:topic_id>")

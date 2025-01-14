@@ -3,59 +3,102 @@
     font-weight: bold;
     color: #ff4500;
 }
-/* Общи стилове */
+
+/* Страница за грешки */
+.error-page {
+    text-align: center;
+    margin: 50px auto;
+    max-width: 600px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.error-page h1 {
+    font-size: 2.2em;
+    color: #cc0000; /* Ярко червен цвят за грешки */
+    margin-bottom: 20px;
+}
+
+.error-page p {
+    font-size: 1.2em;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.error-page .button {
+    display: inline-block;
+    background-color: #0055cc;
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: background-color 0.3s;
+}
+
+.error-page .button:hover {
+    background-color: #003399;
+}
+/* Основни настройки */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
+    background-color: #f6f6f6;
+    color: #333;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
+    line-height: 1.6;
 }
 
 /* Хедър */
 header {
-    background-color: #0056b3;
+    background-color: #0055cc;
     color: white;
-    padding: 10px 20px;
-    text-align: center;
+    padding: 20px;
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
+    border-bottom: 5px solid #003399; /* Дебела синя линия под хедъра */
 }
 
-header .logo {
-    height: 150px;
-    margin-right: 25px;
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo {
+    max-width: 100px;
+    height: auto;
+}
+
+header h1 {
+    font-size: 1.8em;
+    margin: 0;
 }
 
 /* Навигация */
 nav {
-    background-color: #0047a3;
-    overflow: hidden;
-}
-
-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-}
-
-nav ul li {
-    margin: 0;
-}
-
-nav ul li a {
-    color: white;
-    text-decoration: none;
-    padding: 14px 20px;
-    display: block;
+    background-color: #0077ff;
+    padding: 10px;
     text-align: center;
 }
 
-nav ul li a:hover {
-    background-color: #003580;
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 1em;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+nav a:hover {
+    background-color: #003399;
+    color: #f6f6f6;
 }
 
 /* Главен контейнер */
@@ -145,4 +188,90 @@ aside.sidebar {
 
 .delete-post:hover {
     background-color: darkred;
+}
+/* Бутони */
+button {
+    background-color: #0055cc;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #003399;
+}
+
+/* Футър */
+footer {
+    background-color: #003399;
+    color: white;
+    text-align: center;
+    padding: 10px 20px;
+    margin-top: 20px;
+    border-top: 2px solid #e0e0e
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 8px;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .calendar table {
+        display: block;
+        overflow-x: auto;
+    }
+
+.sidebar {
+    flex: 1;
+    padding: 10px;
+}
+
+.sidebar iframe {
+    width: 100%;
+    height: auto;
+}
+ 
+  main, .sidebar {
+        flex: 1;
+    }
+.holiday-christian {
+    background-color: #ffdddd;
+    font-weight: bold;
+}
+
+.holiday-muslim {
+    background-color: #ddffdd;
+    font-weight: bold;
+}
+
+.holiday-bank {
+    background-color: #ddddff;
+    font-weight: bold;
+}
+.content-with-image {
+    display: flex;
+    align-items: flex-start; /* Подравнява текста и изображението по горната част */
+    gap: 15px; /* Разстояние между текста и изображението */
+}
+
+.side-image {
+    max-width: 150px; /* Ограничете ширината на изображението */
+    height: auto; /* Запазва пропорциите */
+    border-radius: 8px; /* Придава заоблени ъгли (по избор) */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Леки сенки (по избор) */
+}
+
+.text-content {
+    flex: 1; /* Позволява на текста да заеме останалото място */
+    font-size: 16px; /* Размер на текста */
+    line-height: 1.6; /* Разстояние между редовете */
 }
